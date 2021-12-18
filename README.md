@@ -13,7 +13,7 @@
 | Day  | Part One | Part Two |
 |---|:---:|:---:|
 | ✅ [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1)|⭐️|⭐️|
-| ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|||
+| ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|||
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
@@ -96,3 +96,38 @@ let solutionDay1b = input
 
 
 ## Day 2 
+
+I decided to use tuples which are a great very descriptive and expressive swift feature together with an enum to move the submarine up down and forward. For part two I added some more functions to my model and one extra variable.
+My model is a struct. I do not change the struct which is immutable but instead I return a new instance for every change...
+
+```swift
+let input: [(command: SubmarineCommand, amount: Int)] = getInputDay2()
+
+let solutionDay2a = input.reduce(Position()) { position, course in
+    switch course.command {
+    case .forward:
+        return position.increaseForward(horizontal: course.amount)
+    case .down:
+        return position.increaseDepth(depth: course.amount)
+    case .up:
+        return position.decreaseDepth(depth: course.amount)
+    }
+}.currentPositionResult
+print("Solution day2 - Part1: \(solutionDay2a)")
+
+let solutionDay2b = input.reduce(Position()) { position, course in
+    switch course.command {
+    case .forward:
+        return position.increaseForwardWithAim(units: course.amount)
+    case .down:
+        return position.increaseAim(aim: course.amount)
+    case .up:
+        return position.decreaseAim(aim: course.amount)
+    }
+}.currentPositionResult
+
+print("Solution day2 - Part2: \(solutionDay2b)")
+```
+
+
+## Day 3
