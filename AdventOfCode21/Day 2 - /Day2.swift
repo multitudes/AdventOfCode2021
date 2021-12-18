@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 func day2() {
     let input: [(command: SubmarineCommand, amount: Int)] = getInputDay2()
     
