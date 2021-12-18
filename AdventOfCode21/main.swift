@@ -18,5 +18,6 @@ let arguments = CommandLine.arguments
         let greeting = arguments[1]
         print(greeting)
     }
-day1()
+//day1()
+day2()
 

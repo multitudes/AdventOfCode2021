@@ -12,6 +12,8 @@
 		4508C519275A96D800201382 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508C503275A8AE500201382 /* main.swift */; };
 		4508C51D275A9A3F00201382 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 4508C51C275A9A3F00201382 /* Algorithms */; };
 		45510916275B85E900DD5BD6 /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45510915275B85E900DD5BD6 /* Day1.swift */; };
+		45C7FE1D276E491200CD998F /* input-2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45C7FE1C276E490800CD998F /* input-2.txt */; };
+		45C7FE20276E500500CD998F /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7FE1B276E47F200CD998F /* Day2.swift */; };
 		45CE3A41275A9AE70087F81A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 45CE3A40275A9AE70087F81A /* Algorithms */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		4508C50C275A8B8A00201382 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		4508C511275A8D6700201382 /* ResourceBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResourceBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		45510915275B85E900DD5BD6 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
+		45C7FE1B276E47F200CD998F /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		45C7FE1C276E490800CD998F /* input-2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "input-2.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,30 @@
 		4508C502275A8AE500201382 /* AdventOfCode21 */ = {
 			isa = PBXGroup;
 			children = (
+				45C7FE1A276E47CC00CD998F /* Day 25 -  */,
+				45C7FE19276E47C600CD998F /* Day 24 -  */,
+				45C7FE18276E47C000CD998F /* Day 23 -  */,
+				45C7FE17276E47BB00CD998F /* Day 22 -  */,
+				45C7FE16276E47B500CD998F /* Day 21 -  */,
+				45C7FE15276E47AE00CD998F /* Day 20 -  */,
+				45C7FE14276E47A700CD998F /* Day 19 -  */,
+				45C7FE0C276E476100CD998F /* Day 18 -  */,
+				45C7FE13276E479C00CD998F /* Day 17 -  */,
+				45C7FE12276E479400CD998F /* Day 16 -  */,
+				45C7FE11276E478D00CD998F /* Day 15 -  */,
+				45C7FE10276E478200CD998F /* Day 14 -  */,
+				45C7FE0F276E477A00CD998F /* Day 13 -  */,
+				45C7FE0E276E477300CD998F /* Day 12 -  */,
+				45C7FE0D276E476B00CD998F /* Day 11 -  */,
+				45C7FE0B276E475700CD998F /* Day 10 -  */,
+				45C7FE0A276E474F00CD998F /* Day 9 -  */,
+				45C7FE09276E474800CD998F /* Day 8 -  */,
+				45C7FE08276E474100CD998F /* Day 7 -  */,
+				45C7FE07276E473900CD998F /* Day 6 -  */,
+				45C7FE06276E473000CD998F /* Day 5 -  */,
+				45C7FE05276E472700CD998F /* Day 4 -  */,
+				45C7FE04276E471800CD998F /* Day 3 - */,
+				45C7FE03276E470300CD998F /* Day 2 -  */,
 				4508C50A275A8B1000201382 /* Day 1 - Sonar Sweep */,
 				4508C503275A8AE500201382 /* main.swift */,
 			);
@@ -90,6 +118,176 @@
 				45510915275B85E900DD5BD6 /* Day1.swift */,
 			);
 			path = "Day 1 - Sonar Sweep";
+			sourceTree = "<group>";
+		};
+		45C7FE03276E470300CD998F /* Day 2 -  */ = {
+			isa = PBXGroup;
+			children = (
+				45C7FE1C276E490800CD998F /* input-2.txt */,
+				45C7FE1B276E47F200CD998F /* Day2.swift */,
+			);
+			path = "Day 2 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE04276E471800CD998F /* Day 3 - */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 3 -";
+			sourceTree = "<group>";
+		};
+		45C7FE05276E472700CD998F /* Day 4 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 4 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE06276E473000CD998F /* Day 5 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 5 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE07276E473900CD998F /* Day 6 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 6 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE08276E474100CD998F /* Day 7 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 7 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE09276E474800CD998F /* Day 8 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 8 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0A276E474F00CD998F /* Day 9 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 9 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0B276E475700CD998F /* Day 10 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 10 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0C276E476100CD998F /* Day 18 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 18 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0D276E476B00CD998F /* Day 11 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 11 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0E276E477300CD998F /* Day 12 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 12 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE0F276E477A00CD998F /* Day 13 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 13 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE10276E478200CD998F /* Day 14 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 14 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE11276E478D00CD998F /* Day 15 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 15 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE12276E479400CD998F /* Day 16 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 16 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE13276E479C00CD998F /* Day 17 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 17 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE14276E47A700CD998F /* Day 19 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 19 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE15276E47AE00CD998F /* Day 20 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 20 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE16276E47B500CD998F /* Day 21 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 21 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE17276E47BB00CD998F /* Day 22 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 22 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE18276E47C000CD998F /* Day 23 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 23 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE19276E47C600CD998F /* Day 24 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 24 - ";
+			sourceTree = "<group>";
+		};
+		45C7FE1A276E47CC00CD998F /* Day 25 -  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Day 25 - ";
 			sourceTree = "<group>";
 		};
 		45CE3A3F275A9AE70087F81A /* Frameworks */ = {
@@ -187,6 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C7FE1D276E491200CD998F /* input-2.txt in Resources */,
 				4508C515275A904100201382 /* input.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4508C519275A96D800201382 /* main.swift in Sources */,
+				45C7FE20276E500500CD998F /* Day2.swift in Sources */,
 				45510916275B85E900DD5BD6 /* Day1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
