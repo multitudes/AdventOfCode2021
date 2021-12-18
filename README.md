@@ -13,7 +13,7 @@
 | Day  | Part One | Part Two |
 |---|:---:|:---:|
 | ✅ [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1)|⭐️|⭐️|
-| ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|||
+| ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|||
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
@@ -96,3 +96,85 @@ let solutionDay1b = input
 
 
 ## Day 2 
+
+I decided to use tuples which are a great very descriptive and expressive swift feature together with an enum to move the submarine up down and forward. For part two I added some more functions to my model and one extra variable.
+My model is a struct. I do not change the struct which is immutable but instead I return a new instance for every change...
+
+```swift
+let input: [(command: SubmarineCommand, amount: Int)] = getInputDay2()
+
+let solutionDay2a = input.reduce(Position()) { position, course in
+    switch course.command {
+    case .forward:
+        return position.increaseForward(horizontal: course.amount)
+    case .down:
+        return position.increaseDepth(depth: course.amount)
+    case .up:
+        return position.decreaseDepth(depth: course.amount)
+    }
+}.currentPositionResult
+print("Solution day2 - Part1: \(solutionDay2a)")
+
+let solutionDay2b = input.reduce(Position()) { position, course in
+    switch course.command {
+    case .forward:
+        return position.increaseForwardWithAim(units: course.amount)
+    case .down:
+        return position.increaseAim(aim: course.amount)
+    case .up:
+        return position.decreaseAim(aim: course.amount)
+    }
+}.currentPositionResult
+
+print("Solution day2 - Part2: \(solutionDay2b)")
+```
+
+
+## Day 3
+
+I have binary numbers in input so I thought why not use bitwise operators instead of just using strings.
+``` swift
+let input: [String] = getInputDay3()
+
+/// How many bits I got per input assuming that they are all the same?
+let numberOfBits: Int = {
+    if let count = input.first?.count {
+        return count
+    } else { return 0 }
+}()
+
+/// Used to solve the quiz
+var gammaRate: Int = 0
+var epsilonRate = 0
+var powerConsumption = 0
+
+/// bitwise operation - If I have 5 bits I will start from 5, then 4 ... till one
+for i in stride(from: numberOfBits, to: 0, by: -1) {
+    /// initialise my counts
+    var ones = 0; var zeroes = 0
+    /// looping on the inputs
+    for binary in input {
+        /// my binary input transformed from string to Int
+        let binaryInt = Int(binary, radix: 2)!
+        /// I do a logic AND between my binary and the current bit like
+        /// ex binary is 11011 and my i is 5 I will compare the two:
+        /// 11011 & 10000 which will give 10000 = 16
+        /// I look only for zeroes first ... because practical
+        if (binaryInt & (2 << (i - 2))) == 0 {
+            zeroes += 1
+        } else {
+            ones += 1
+        }
+    }
+    /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
+    if ones > zeroes {
+        /// again bitwise operations here. I am still using my stride as comparing the bit positions,
+        /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
+        gammaRate += (2 << (i - 2))
+    } else {
+        epsilonRate += (2 << (i - 2))
+    }
+}
+powerConsumption = gammaRate * epsilonRate
+let solutionDay2a = powerConsumption
+```
