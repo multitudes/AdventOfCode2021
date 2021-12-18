@@ -11,7 +11,7 @@ import Foundation
 
 func day2() {
     let input: [(command: SubmarineCommand, amount: Int)] = getInputDay2()
-
+    
     let solutionDay2a = input.reduce(Position()) { position, course in
         switch course.command {
         case .forward:
@@ -24,17 +24,19 @@ func day2() {
     }.currentPositionResult
     print("Solution day2 - Part1: \(solutionDay2a)")
     
+    let solutionDay2b = input.reduce(Position()) { position, course in
+        switch course.command {
+        case .forward:
+            return position.increaseForwardWithAim(units: course.amount)
+        case .down:
+            return position.increaseAim(aim: course.amount)
+        case .up:
+            return position.decreaseAim(aim: course.amount)
+        }
+    }.currentPositionResult
     
-    
-    
-    
-    
-    
-    
-    
-    print("Solution day2 - Part2: \(solutionDay2a)")
+    print("Solution day2 - Part2: \(solutionDay2b)")
 }
-
 
 
 func getInputDay2() -> [(command: SubmarineCommand, amount: Int)] {
@@ -66,7 +68,6 @@ func getInputDay2() -> [(command: SubmarineCommand, amount: Int)] {
     }
     return input
 }
-
 
 
 enum SubmarineCommand: String {
@@ -106,7 +107,7 @@ extension Position {
     func decreaseDepth(depth: Int) -> Position {
         let newdepth = self.depth - depth
         return Position(depth: newdepth, horizontal: self.horizontal)
-
+        
     }
     
     /// this is for part 2
@@ -117,7 +118,7 @@ extension Position {
     }
     
     func increaseForwardWithAim(units: Int) -> Position {
-        let newHorizontal = self.horizontal + horizontal
+        let newHorizontal = self.horizontal + units
         let newdepth = self.depth + (self.aim * units)
         return Position(depth: newdepth, horizontal: newHorizontal, aim: self.aim)
     }
@@ -125,7 +126,6 @@ extension Position {
     func decreaseAim(aim: Int) -> Position {
         let newAim = self.aim - aim
         return Position(depth: self.depth, horizontal: self.horizontal, aim: newAim)
-
     }
     
     
