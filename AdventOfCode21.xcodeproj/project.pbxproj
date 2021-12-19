@@ -11,6 +11,9 @@
 		4508C517275A907F00201382 /* ResourceBundle.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4508C511275A8D6700201382 /* ResourceBundle.bundle */; };
 		4508C519275A96D800201382 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508C503275A8AE500201382 /* main.swift */; };
 		4508C51D275A9A3F00201382 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 4508C51C275A9A3F00201382 /* Algorithms */; };
+		4543A41C276F7FBA00D0FF32 /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543A41A276F7FBA00D0FF32 /* Day5.swift */; };
+		4543A41D276F7FBE00D0FF32 /* input-5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4543A419276F7FBA00D0FF32 /* input-5.txt */; };
+		4543A41E276F7FC000D0FF32 /* input-5a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4543A41B276F7FBA00D0FF32 /* input-5a.txt */; };
 		45510916275B85E900DD5BD6 /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45510915275B85E900DD5BD6 /* Day1.swift */; };
 		45C7FE1D276E491200CD998F /* input-2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45C7FE1C276E490800CD998F /* input-2.txt */; };
 		45C7FE20276E500500CD998F /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7FE1B276E47F200CD998F /* Day2.swift */; };
@@ -38,6 +41,9 @@
 		4508C503275A8AE500201382 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4508C50C275A8B8A00201382 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		4508C511275A8D6700201382 /* ResourceBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResourceBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4543A419276F7FBA00D0FF32 /* input-5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-5.txt"; sourceTree = "<group>"; };
+		4543A41A276F7FBA00D0FF32 /* Day5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
+		4543A41B276F7FBA00D0FF32 /* input-5a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-5a.txt"; sourceTree = "<group>"; };
 		45510915275B85E900DD5BD6 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
 		45C7FE1B276E47F200CD998F /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
 		45C7FE1C276E490800CD998F /* input-2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "input-2.txt"; sourceTree = "<group>"; };
@@ -155,6 +161,9 @@
 		45C7FE06276E473000CD998F /* Day 5 -  */ = {
 			isa = PBXGroup;
 			children = (
+				4543A41A276F7FBA00D0FF32 /* Day5.swift */,
+				4543A419276F7FBA00D0FF32 /* input-5.txt */,
+				4543A41B276F7FBA00D0FF32 /* input-5a.txt */,
 			);
 			path = "Day 5 - ";
 			sourceTree = "<group>";
@@ -357,7 +366,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					4508C4FF275A8AE500201382 = {
 						CreatedOnToolsVersion = 13.1;
@@ -397,6 +406,8 @@
 				45C7FE1D276E491200CD998F /* input-2.txt in Resources */,
 				45C7FE24276E661100CD998F /* input-3.txt in Resources */,
 				4508C515275A904100201382 /* input.txt in Resources */,
+				4543A41E276F7FC000D0FF32 /* input-5a.txt in Resources */,
+				4543A41D276F7FBE00D0FF32 /* input-5.txt in Resources */,
 				45C7FE32276E720C00CD998F /* input-3a.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4508C519275A96D800201382 /* main.swift in Sources */,
+				4543A41C276F7FBA00D0FF32 /* Day5.swift in Sources */,
 				45C7FE20276E500500CD998F /* Day2.swift in Sources */,
 				45C7FE22276E65DA00CD998F /* Day3.swift in Sources */,
 				45510916275B85E900DD5BD6 /* Day1.swift in Sources */,
@@ -543,6 +555,7 @@
 		4508C508275A8AE500201382 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GGXD5E6AF8;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -555,6 +568,7 @@
 		4508C509275A8AE500201382 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GGXD5E6AF8;
 				ENABLE_HARDENED_RUNTIME = YES;
