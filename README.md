@@ -16,7 +16,7 @@
 | ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️|⭐️|
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
-| ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
+| ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5|⭐️|⭐️|
 
 ## Preparing the environment
 
@@ -246,4 +246,62 @@ for bitNumber in stride(from: numberOfBits, to: 0, by: -1) {
 
 let solutionDay2b = lifeSupportRating
 
+```
+
+## Day 4
+
+## Day 5
+
+I first used a regex to get my inpits mapped. Used a custom struct `Point` instead of the `CGPoint` because I need to make it conform to `Hashable` to use in `Set` instances.  
+Using the input file to initialise an array of `Lines`.  
+
+```swift
+/// my regex convenience function
+extension String {
+    func getTrimmedCapturedGroupsFrom(regexPattern: String)-> [String]? {
+        let text = self
+        let regex = try? NSRegularExpression(pattern: regexPattern)
+        
+        let match = regex?.firstMatch(in: text, range: NSRange(text.startIndex..., in: text))
+        
+        if let match = match {
+            return (0..<match.numberOfRanges).compactMap {
+                if let range = Range(match.range(at: $0), in: text) {
+                    return $0 > 0 ? String(text[range]).trimmingCharacters(in: .whitespaces) : nil
+                }
+                return nil
+            }
+        }
+        return nil
+    }
+}
+
+```
+And once I have an array of `Line` as input I use this to get the intersections:
+```swift
+func checkIntersections(for input: [Line]) -> Int {
+    var intersections: Set<Point> = []
+    var accumulator: Set<Point> = Set(input.first!.points)
+    for line in input.dropFirst() {
+        let intersection = accumulator.intersection(Set(line.points))
+        intersections = intersections.union(intersection)
+        accumulator = accumulator.union(Set(line.points))
+    }
+    return intersections.count
+}
+```
+Of course the full code is in the repo but the solution will be :
+```swift
+let input: [Line] = getInputDay5()
+
+/// for the first part I check only for horiz and vert lines
+let lines: [Line] = input.filter {
+    $0.orientation == .horizontal || $0.orientation == .vertical
+}
+let solutionDay2a = checkIntersections(for: lines)
+print("Solution day2 - Part1: \(solutionDay2a)")
+/// part two checks all of them but the intermediate points in the lines are already calculated in the init of the `Line` struct so it was easy... 
+let solutionDay2b = checkIntersections(for: input)
+
+print("Solution day2 - Part2: \(solutionDay2b)")
 ```
