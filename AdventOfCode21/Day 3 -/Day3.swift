@@ -43,9 +43,9 @@ func day3() {
     }()
 
     /// Used to solve the quiz
-    var gammaRate: Int = 0
-    var epsilonRate = 0
-    var powerConsumption = 0
+    var gammaRate: UInt = 0
+    var epsilonRate: UInt = 0
+    var powerConsumption: UInt = 0
 
     /// bitwise operation - If I have 5 bits I will start from 5, then 4 ... till one
     for i in stride(from: numberOfBits, to: 0, by: -1) {
@@ -54,7 +54,7 @@ func day3() {
         /// looping on the inputs
         for binary in input {
             /// my binary input transformed from string to Int
-            let binaryInt = Int(binary, radix: 2)!
+            let binaryInt = UInt(binary, radix: 2)!
             /// I do a logic AND between my binary and the current bit like
             /// ex binary is 11011 and my i is 5 I will compare the two:
             /// 11011 & 10000 which will give 10000 = 16
