@@ -14,7 +14,7 @@
 |---|:---:|:---:|
 | ✅ [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1)|⭐️|⭐️|
 | ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
-| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|||
+| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️||
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
 
@@ -180,3 +180,4 @@ for i in stride(from: numberOfBits, to: 0, by: -1) {
 powerConsumption = gammaRate * epsilonRate
 let solutionDay2a = powerConsumption
 ```
+For part 2 I need to iterate on the arrays sequentially again, only that the arrays are being filtered, so I will keep on iterating until I have only one value left. I thought of using the `zip` swift operator but that one would not do because the arrays do not have the same length. I could use padding but this is extra work.
