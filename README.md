@@ -132,7 +132,9 @@ print("Solution day2 - Part2: \(solutionDay2b)")
 
 ## Day 3
 
-I have binary numbers in input so I thought why not use bitwise operators instead of just using strings.
+I have binary numbers in input so I thought why not use bitwise operators instead of just using strings. The interesting thing is that the gammaRate and the epsilonRate in part 1 have inversed bit, and I could have also used the `NOT` or `~` bitwise operator. The only problem is that I have 12 bits in my puzzle input and it would work better if I had a UInt12. ex 1011010111011 is inverted 0100101000100. but the same input in Uint32 written down is 00001011010111011 and inverted is 11110100101000100! basically not what I need for the puzzle.  
+Also the code is quite unreadable for once. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun
+
 ``` swift
 let input: [String] = getInputDay3()
 
@@ -144,9 +146,9 @@ let numberOfBits: Int = {
 }()
 
 /// Used to solve the quiz
-var gammaRate: Int = 0
-var epsilonRate = 0
-var powerConsumption = 0
+var gammaRate: UInt = 0
+var epsilonRate: UInt = 0
+var powerConsumption: UInt = 0
 
 /// bitwise operation - If I have 5 bits I will start from 5, then 4 ... till one
 for i in stride(from: numberOfBits, to: 0, by: -1) {
@@ -155,7 +157,7 @@ for i in stride(from: numberOfBits, to: 0, by: -1) {
     /// looping on the inputs
     for binary in input {
         /// my binary input transformed from string to Int
-        let binaryInt = Int(binary, radix: 2)!
+        let binaryInt = UInt(binary, radix: 2)!
         /// I do a logic AND between my binary and the current bit like
         /// ex binary is 11011 and my i is 5 I will compare the two:
         /// 11011 & 10000 which will give 10000 = 16
