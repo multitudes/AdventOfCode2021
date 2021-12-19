@@ -14,7 +14,7 @@
 |---|:---:|:---:|
 | ✅ [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1)|⭐️|⭐️|
 | ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
-| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️||
+| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️|⭐️|
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
 
@@ -133,7 +133,8 @@ print("Solution day2 - Part2: \(solutionDay2b)")
 ## Day 3
 
 I have binary numbers in input so I thought why not use bitwise operators instead of just using strings. The interesting thing is that the gammaRate and the epsilonRate in part 1 have inversed bit, and I could have also used the `NOT` or `~` bitwise operator. The only problem is that I have 12 bits in my puzzle input and it would work better if I had a UInt12. ex 1011010111011 is inverted 0100101000100. but the same input in Uint32 written down is 00001011010111011 and inverted is 11110100101000100! basically not what I need for the puzzle.  
-Also the code is quite unreadable for once. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun!  
+More info about these operators are in the docs: [https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html).  
+Also the code is quite unreadable sometimes. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun!  
 Bit difficult to comment this code. Better check on the website the original challenge if something is not clear :)
 
 ``` swift
@@ -202,8 +203,6 @@ func updateRatingsArray(inputArray input: [String], for rating: Rating, bitNumbe
     case .oxygen:
         /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
         if onesArray.count >= zeroesArray.count {
-            /// again bitwise operations here. I am still using my stride as comparing the bit positions,
-            /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
             print("oxygenGeneratorRatingArray ones are more - bit nr \(bitNumber) \(onesArray)")
             return onesArray
         } else {
@@ -213,8 +212,6 @@ func updateRatingsArray(inputArray input: [String], for rating: Rating, bitNumbe
     case .co2:
         /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
         if zeroesArray.count <= onesArray.count   {
-            /// again bitwise operations here. I am still using my stride as comparing the bit positions,
-            /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
             print("co2ScrubberRatingArray zeroes are more - bit nr \(bitNumber) \(zeroesArray)")
             return zeroesArray
         } else {
