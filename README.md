@@ -133,6 +133,7 @@ print("Solution day2 - Part2: \(solutionDay2b)")
 ## Day 3
 
 I have binary numbers in input so I thought why not use bitwise operators instead of just using strings. The interesting thing is that the gammaRate and the epsilonRate in part 1 have inversed bit, and I could have also used the `NOT` or `~` bitwise operator. The only problem is that I have 12 bits in my puzzle input and it would work better if I had a UInt12. ex 1011010111011 is inverted 0100101000100. but the same input in Uint32 written down is 00001011010111011 and inverted is 11110100101000100! basically not what I need for the puzzle.  
+More info about these operators are in the docs: [https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html)
 Also the code is quite unreadable for once. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun!  
 Bit difficult to comment this code. Better check on the website the original challenge if something is not clear :)
 
