@@ -14,7 +14,7 @@
 |---|:---:|:---:|
 | ✅ [Day 1: Sonar Sweep](https://adventofcode.com/2021/day/1)|⭐️|⭐️|
 | ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
-| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|||
+| ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️||
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|||
 
@@ -133,50 +133,120 @@ print("Solution day2 - Part2: \(solutionDay2b)")
 ## Day 3
 
 I have binary numbers in input so I thought why not use bitwise operators instead of just using strings. The interesting thing is that the gammaRate and the epsilonRate in part 1 have inversed bit, and I could have also used the `NOT` or `~` bitwise operator. The only problem is that I have 12 bits in my puzzle input and it would work better if I had a UInt12. ex 1011010111011 is inverted 0100101000100. but the same input in Uint32 written down is 00001011010111011 and inverted is 11110100101000100! basically not what I need for the puzzle.  
-Also the code is quite unreadable for once. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun
+Also the code is quite unreadable for once. Being used to read swift code which is expressive the below feels like coming from somewhere else... But it is fun!  
+Bit difficult to comment this code. Better check on the website the original challenge if something is not clear :)
 
 ``` swift
-let input: [String] = getInputDay3()
-
-/// How many bits I got per input assuming that they are all the same?
-let numberOfBits: Int = {
-    if let count = input.first?.count {
-        return count
-    } else { return 0 }
-}()
-
-/// Used to solve the quiz
-var gammaRate: UInt = 0
-var epsilonRate: UInt = 0
-var powerConsumption: UInt = 0
-
-/// bitwise operation - If I have 5 bits I will start from 5, then 4 ... till one
-for i in stride(from: numberOfBits, to: 0, by: -1) {
+/// I created this function which is reusable for part two... and uses bitwise operators to look which bits are ones or zeroes for a specific bitNumber and return the two arrays of ones and zeroes
+func loopOn(array input: [String], bitNumber: Int) -> (ones: [String], zeroes: [String]) {
     /// initialise my counts
-    var ones = 0; var zeroes = 0
+    var onesArray: [String] = []; var zeroesArray: [String] = []
     /// looping on the inputs
     for binary in input {
         /// my binary input transformed from string to Int
         let binaryInt = UInt(binary, radix: 2)!
+        
         /// I do a logic AND between my binary and the current bit like
         /// ex binary is 11011 and my i is 5 I will compare the two:
         /// 11011 & 10000 which will give 10000 = 16
         /// I look only for zeroes first ... because practical
-        if (binaryInt & (2 << (i - 2))) == 0 {
-            zeroes += 1
+        if (binaryInt & (2 << (bitNumber - 2))) == 0 {
+            zeroesArray.append(binary)
         } else {
-            ones += 1
+            onesArray.append(binary)
         }
     }
+    return (onesArray, zeroesArray)
+}
+
+/// bitwise operation - If I have 5 bits I will start from 5, then 4 ... till one
+for bitNumber in stride(from: numberOfBits, to: 0, by: -1) {
+    /// `loopOn()` returns two arrays of strings, the one that passed the test to have a one at the bitnumber position and the ones with the zeroes for each bit number position passed down in the for loop
+    let (ones, zeroes) = loopOn(array: input, bitNumber: bitNumber)
     /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
-    if ones > zeroes {
+    if ones.count > zeroes.count {
         /// again bitwise operations here. I am still using my stride as comparing the bit positions,
         /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
-        gammaRate += (2 << (i - 2))
+        gammaRate += (2 << (bitNumber - 2))
     } else {
-        epsilonRate += (2 << (i - 2))
+        epsilonRate += (2 << (bitNumber - 2))
     }
 }
 powerConsumption = gammaRate * epsilonRate
 let solutionDay2a = powerConsumption
+```
+For part 2 I need to iterate on the arrays sequentially again, only that the arrays are being filtered, so I will keep on iterating until I have only one value left. I thought of using the `zip` swift operator but that one would not do because the arrays do not have the same length. I could use padding but this is extra work and is not making the code better.
+
+```swift
+/// this will be my solution
+var lifeSupportRating = 0
+
+/// optional because converting a string to int will be always an optional anyway
+var oxygenGeneratorRating: Int? = nil
+var co2ScrubberRating: Int? = nil
+
+/// initialize my arrays to loop on - at the beginning they will have both the same input
+var oxygenGeneratorRatingArray: [String] = input
+var co2ScrubberRatingArray: [String] = input
+
+/// This just for clarity. I have two cases for the rating and I will calculate them separately in the same function below
+enum Rating {
+    case oxygen, co2
+}
+
+/// convenience function. I will update the array in inpit depending if I am looking for oxigen rating or co2 rating.
+func updateRatingsArray(inputArray input: [String], for rating: Rating, bitNumber: Int) -> [String] {
+    let (onesArray, zeroesArray) = loopOn(array: input, bitNumber: bitNumber)
+
+    switch rating {
+    case .oxygen:
+        /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
+        if onesArray.count >= zeroesArray.count {
+            /// again bitwise operations here. I am still using my stride as comparing the bit positions,
+            /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
+            print("oxygenGeneratorRatingArray ones are more - bit nr \(bitNumber) \(onesArray)")
+            return onesArray
+        } else {
+            print("oxygenGeneratorRatingArray zeroes are more - bit nr \(bitNumber) \(onesArray)")
+            return zeroesArray
+        }
+    case .co2:
+        /// at the end of my loop on the inputs I check if the ones were more than the  zeroes
+        if zeroesArray.count <= onesArray.count   {
+            /// again bitwise operations here. I am still using my stride as comparing the bit positions,
+            /// so if i = 5, this means 10000, and 2 << (5 - 2) is 10000
+            print("co2ScrubberRatingArray zeroes are more - bit nr \(bitNumber) \(zeroesArray)")
+            return zeroesArray
+        } else {
+            print("co2ScrubberRatingArray zeroes are less - bit nr \(bitNumber) \(onesArray)")
+            return onesArray
+        }
+    }
+}
+/// again using the stride looping on the bits
+for bitNumber in stride(from: numberOfBits, to: 0, by: -1) {
+    /// I only update my array if it is not empty - I might have the solution already for the other array but not for all
+    if !oxygenGeneratorRatingArray.isEmpty {
+        oxygenGeneratorRatingArray = updateRatingsArray(inputArray: oxygenGeneratorRatingArray, for: .oxygen, bitNumber: bitNumber)}
+    /// Here i have a solution and I update my property with a value
+    if oxygenGeneratorRatingArray.count == 1 {
+        oxygenGeneratorRating = Int(oxygenGeneratorRatingArray[0], radix: 2 )
+    }
+    /// I only update my array if it is not empty
+    if !co2ScrubberRatingArray.isEmpty {
+        co2ScrubberRatingArray = updateRatingsArray(inputArray: co2ScrubberRatingArray, for: .co2, bitNumber: bitNumber)}
+    /// Here i have a solution and I update my property with a value
+    if co2ScrubberRatingArray.count == 1 {
+        co2ScrubberRating = Int(co2ScrubberRatingArray[0], radix: 2)
+    }
+    /// if they are both non nil... then I can break
+    if let oxygenGeneratorRating = oxygenGeneratorRating,
+        let co2ScrubberRating = co2ScrubberRating {
+        lifeSupportRating = oxygenGeneratorRating * co2ScrubberRating
+        break
+    }
+}
+
+let solutionDay2b = lifeSupportRating
+
 ```
