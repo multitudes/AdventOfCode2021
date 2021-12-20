@@ -16,7 +16,13 @@
 | ✅ [Day 2: Dive!](https://adventofcode.com/2021/day/2)|⭐️|⭐️|
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️|⭐️|
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|||
-| ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5|⭐️|⭐️|
+| ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|⭐️|⭐️|
+| ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|||
+| ✅ [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7)|||
+| ✅ [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8)|||
+| ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|||
+| ✅ [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10)|||
+| ✅ [Day 11: Dumbo Octopus](https://adventofcode.com/2021/day/11)|||
 
 ## Preparing the environment
 
@@ -305,3 +311,10 @@ let solutionDay2b = checkIntersections(for: input)
 
 print("Solution day2 - Part2: \(solutionDay2b)")
 ```
+I made a small app in SwiftUI to visualize the lines using the canvas view:  
+
+<p align="center">
+  <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1640006190480/tCnhA0rbu.jpeg" width="200"  title="example view">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1640006196121/3bLORvK_N.png" width="200"  title="solution view">
+</p>
+<br></br>
