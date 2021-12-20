@@ -12,7 +12,7 @@
 		4508C519275A96D800201382 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508C503275A8AE500201382 /* main.swift */; };
 		4508C51D275A9A3F00201382 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 4508C51C275A9A3F00201382 /* Algorithms */; };
 		453C179E276FAC5B0023C08C /* input-4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 453C179D276FAC5B0023C08C /* input-4.txt */; };
-		453C17A0276FAC5E0023C08C /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C179F276FAC5E0023C08C /* Day5.swift */; };
+		453C17A0276FAC5E0023C08C /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C179F276FAC5E0023C08C /* Day4.swift */; };
 		4543A41C276F7FBA00D0FF32 /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543A41A276F7FBA00D0FF32 /* Day5.swift */; };
 		4543A41D276F7FBE00D0FF32 /* input-5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4543A419276F7FBA00D0FF32 /* input-5.txt */; };
 		4543A41E276F7FC000D0FF32 /* input-5a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4543A41B276F7FBA00D0FF32 /* input-5a.txt */; };
@@ -23,6 +23,7 @@
 		45C7FE24276E661100CD998F /* input-3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45C7FE23276E661100CD998F /* input-3.txt */; };
 		45C7FE32276E720C00CD998F /* input-3a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45C7FE31276E720C00CD998F /* input-3a.txt */; };
 		45CE3A41275A9AE70087F81A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 45CE3A40275A9AE70087F81A /* Algorithms */; };
+		45FCF41E2770C53700E1822E /* input-4a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45FCF41D2770C53700E1822E /* input-4a.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +45,7 @@
 		4508C50C275A8B8A00201382 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		4508C511275A8D6700201382 /* ResourceBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResourceBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		453C179D276FAC5B0023C08C /* input-4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-4.txt"; sourceTree = "<group>"; };
-		453C179F276FAC5E0023C08C /* Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
+		453C179F276FAC5E0023C08C /* Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day4.swift; sourceTree = "<group>"; };
 		4543A419276F7FBA00D0FF32 /* input-5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-5.txt"; sourceTree = "<group>"; };
 		4543A41A276F7FBA00D0FF32 /* Day5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
 		4543A41B276F7FBA00D0FF32 /* input-5a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-5a.txt"; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		45C7FE21276E65CC00CD998F /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
 		45C7FE23276E661100CD998F /* input-3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-3.txt"; sourceTree = "<group>"; };
 		45C7FE31276E720C00CD998F /* input-3a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-3a.txt"; sourceTree = "<group>"; };
+		45FCF41D2770C53700E1822E /* input-4a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-4a.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +160,8 @@
 		45C7FE05276E472700CD998F /* Day 4 -  */ = {
 			isa = PBXGroup;
 			children = (
-				453C179F276FAC5E0023C08C /* Day5.swift */,
+				453C179F276FAC5E0023C08C /* Day4.swift */,
+				45FCF41D2770C53700E1822E /* input-4a.txt */,
 				453C179D276FAC5B0023C08C /* input-4.txt */,
 			);
 			path = "Day 4 - ";
@@ -413,6 +416,7 @@
 				45C7FE24276E661100CD998F /* input-3.txt in Resources */,
 				4508C515275A904100201382 /* input.txt in Resources */,
 				453C179E276FAC5B0023C08C /* input-4.txt in Resources */,
+				45FCF41E2770C53700E1822E /* input-4a.txt in Resources */,
 				4543A41E276F7FC000D0FF32 /* input-5a.txt in Resources */,
 				4543A41D276F7FBE00D0FF32 /* input-5.txt in Resources */,
 				45C7FE32276E720C00CD998F /* input-3a.txt in Resources */,
@@ -438,7 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453C17A0276FAC5E0023C08C /* Day5.swift in Sources */,
+				453C17A0276FAC5E0023C08C /* Day4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
