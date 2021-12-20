@@ -12,9 +12,10 @@ func day4() {
     let input:(numbers: [Int], boards: [Board]) = getInputDay4()
     
     let bingoNumbers = input.numbers
-    let boards = input.boards
+    var boards = input.boards
     var solutionDay2a = 0
-outerloop:for bingoNumber in bingoNumbers {
+outerloop:
+    for bingoNumber in bingoNumbers {
     print("BingoNumber ",bingoNumber )
     for board in boards {
         board.addNumber(bingoNumber)
@@ -22,7 +23,11 @@ outerloop:for bingoNumber in bingoNumbers {
             print("\nwinner")
             print(board.score)
             solutionDay2a = board.score
-            break outerloop
+            if let index = boards.firstIndex(of: board) {
+                boards.remove(at: index)
+            }
+           
+            // break outerloop
         }
     }
     
@@ -39,7 +44,12 @@ outerloop:for bingoNumber in bingoNumbers {
 }
 
 /// I assume a bingo biard will be like in both example and challenge 5 x 5
-class Board {
+class Board: Equatable {
+    let id = UUID()
+    static func == (lhs: Board, rhs: Board) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var rows: [[Int]]
     var columns: [[Int]] {
         var cols: [[Int]] = []
@@ -55,7 +65,8 @@ class Board {
     var winner: Bool {
         for row in rows {
             let a = Set(drawnNumbers).intersection(Set(row))
-            if a.count == row.count {
+            if a.count == 5 {
+                print(a)
                 let notMarked = Set(allMyBoardNumbers).subtracting(row).subtracting(drawnNumbers)
                 print("notMarked \(notMarked)")
                 print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
@@ -66,7 +77,8 @@ class Board {
         }
         for col in columns {
             let a = Set(drawnNumbers).intersection(Set(col))
-            if a.count == col.count {
+            if a.count == 5 {
+                print(a)
                 let notMarked = Set(allMyBoardNumbers).subtracting(col).subtracting(drawnNumbers)
                 print("notMarked \(notMarked)")
                 print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
