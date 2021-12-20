@@ -311,3 +311,10 @@ let solutionDay2b = checkIntersections(for: input)
 
 print("Solution day2 - Part2: \(solutionDay2b)")
 ```
+I made a small app in SwiftUI to visualize the lines using the canvas view:  
+
+<p align="center">
+  <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1640006190480/tCnhA0rbu.jpeg" width="200"  title="example view">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1640006196121/3bLORvK_N.png" width="200"  title="solution view">
+</p>
+<br></br>
