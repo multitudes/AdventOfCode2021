@@ -10,10 +10,28 @@ import Foundation
 
 func day4() {
     let input:(numbers: [Int], boards: [Board]) = getInputDay4()
- 
-    let solutionDay2a = 0
+    
+    let bingoNumbers = input.numbers
+    let boards = input.boards
+    var solutionDay2a = 0
+outerloop:for bingoNumber in bingoNumbers {
+    print("BingoNumber ",bingoNumber )
+    for board in boards {
+        board.addNumber(bingoNumber)
+        if board.winner {
+            print("\nwinner")
+            print(board.score)
+            solutionDay2a = board.score
+            break outerloop
+        }
+    }
+    
+    
+}
+    
+    
     print("Solution day2 - Part1: \(solutionDay2a)")
-
+    
     
     let solutionDay2b = 0
     
@@ -38,16 +56,22 @@ class Board {
         for row in rows {
             let a = Set(drawnNumbers).intersection(Set(row))
             if a.count == row.count {
-                let notMarked = Set(allMyBoardNumbers).subtracting(row)
+                let notMarked = Set(allMyBoardNumbers).subtracting(row).subtracting(drawnNumbers)
+                print("notMarked \(notMarked)")
+                print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
                 self.score = Array(notMarked).reduce(0, +) * lastDrawnNumber
+                print("score \(score)")
                 return true
             }
         }
         for col in columns {
             let a = Set(drawnNumbers).intersection(Set(col))
             if a.count == col.count {
-                let notMarked = Set(allMyBoardNumbers).subtracting(col)
+                let notMarked = Set(allMyBoardNumbers).subtracting(col).subtracting(drawnNumbers)
+                print("notMarked \(notMarked)")
+                print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
                 self.score = Array(notMarked).reduce(0, +) * lastDrawnNumber
+                print("score \(score)")
                 return true
             }
         }
@@ -58,10 +82,17 @@ class Board {
     init(string: String) {
         self.rows = string // 5 lines
             .components(separatedBy: "\n")
-            .map { row in // one string line with 5 numbers
-                return row.components(separatedBy: .whitespaces).compactMap { Int($0)} // array number
-        }
+            .compactMap { row in // one string line with 5 numbers
+                let r = row.components(separatedBy: .whitespaces).compactMap { Int($0)}
+                if r.isEmpty { return nil } // the last one might just be empty!
+                return r // array number
+            }
         self.allMyBoardNumbers = Set(self.rows.flatMap {$0})
+    }
+    
+    func addNumber(_ num: Int) {
+        lastDrawnNumber = num
+        drawnNumbers.append(num)
     }
 }
 
@@ -76,6 +107,7 @@ extension Array where Element : Collection {
         return map { $0[ column ] }
     }
 }
+
 func getInputDay4() -> (numbers: [Int], boards: [Board]) {
     var numbers: [Int] = []
     var boards: [Board] = []
@@ -83,22 +115,20 @@ func getInputDay4() -> (numbers: [Int], boards: [Board]) {
         let currentDirectory = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
         let bundleURL = URL(fileURLWithPath: "ResourceBundle.bundle", relativeTo: currentDirectory)
         let bundle = Bundle(url: bundleURL)
-        if let inputFileURL = bundle?.url(forResource: "input-4a", withExtension: "txt") {
+        if let inputFileURL = bundle?.url(forResource: "input-4", withExtension: "txt") {
             do {
                 numbers = try String(contentsOf: inputFileURL)
-                    .split(separator: "\n")
+                    .components(separatedBy: .newlines)
                     .prefix(1)
-                    .compactMap { Int(String($0)) }
-                let boards: [Board] = try String(contentsOf: inputFileURL)
+                    .flatMap({ $0.components(separatedBy: ",").compactMap { Int(String($0)) } })
+                boards = try String(contentsOf: inputFileURL)
                     .components(separatedBy: "\n\n")
                     .dropFirst()
                     .map { Board(string: $0) }
-                dump(boards.first!.columns)
-
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
-    return (numbers: [], boards: [])
+    return (numbers: numbers, boards: boards)
 }
