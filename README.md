@@ -255,6 +255,61 @@ let solutionDay2b = lifeSupportRating
 ```
 
 ## Day 4
+Playing Bingo with the squid. Getting the correct input was trickier than I thought. Maybe I underestimaterd it and lost time debugging it when it did not work as espected.  
+This is to get the input. I return a tuple, The bingo numbers and the boards:  
+
+```swift
+if let inputFileURL = bundle?.url(forResource: "input-4", withExtension: "txt") {
+            do {
+                numbers = try String(contentsOf: inputFileURL)
+                    .components(separatedBy: .newlines)
+                    .prefix(1)
+                    .flatMap({ $0.components(separatedBy: ",").compactMap { Int(String($0)) } })
+                boards = try String(contentsOf: inputFileURL)
+                    .components(separatedBy: "\n\n")
+                    .dropFirst()
+                    .map { Board(string: $0) }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+```
+The board is the class that once initialized gets the logic to check if the bingo number gonna win or not.  
+I stored the row but I found a way to store the column as well, so I can check with the sets if the row or columns are fully marked. Found this quite nice extension on SO by Martin K to get the columns of a nested array and I used it to simplify my code.
+```swift
+extension Array where Element : Collection {
+    subscript(column column : Element.Index) -> [ Element.Iterator.Element ] {
+        return map { $0[ column ] }
+    }
+}
+```
+So the final function for the solutions rwill rely on the instance of the boards to do the math. The code is a bit longer but the main func is:
+```swift
+func day4() {
+    var (bingoNumbers, boards) = getInputDay4()
+    var solutionDay2a: Int? = nil
+    var solutionDay2b = 0
+    for bingoNumber in bingoNumbers {
+        for board in boards {
+            board.addNumber(bingoNumber)
+            if board.winner {
+                /// to be set only once
+                if solutionDay2a == nil {
+                    solutionDay2a = board.score
+                }
+                /// it will be set multiple times - I will keep the last!
+                solutionDay2b = board.score
+                /// boards will get less and less - the winning are removed- looking for the last winning board!
+                if let index = boards.firstIndex(of: board) {
+                    boards.remove(at: index)
+                }
+            }
+        }
+    }
+    print("Solution day2 - Part1: \(solutionDay2a ?? 0)")
+    print("Solution day2 - Part2: \(solutionDay2b)")
+}
+```
 
 ## Day 5
 
