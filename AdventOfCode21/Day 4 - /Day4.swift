@@ -5,51 +5,39 @@
 //  Created by Laurent B on 04/12/2021.
 //
 
-import Algorithms
+
 import Foundation
 
 func day4() {
-    let input:(numbers: [Int], boards: [Board]) = getInputDay4()
-    
-    let bingoNumbers = input.numbers
-    var boards = input.boards
-    var solutionDay2a = 0
-outerloop:
+    var (bingoNumbers, boards) = getInputDay4()
+    var solutionDay2a: Int? = nil
+    var solutionDay2b = 0
     for bingoNumber in bingoNumbers {
-    print("BingoNumber ",bingoNumber )
-    for board in boards {
-        board.addNumber(bingoNumber)
-        if board.winner {
-            print("\nwinner")
-            print(board.score)
-            solutionDay2a = board.score
-            if let index = boards.firstIndex(of: board) {
-                boards.remove(at: index)
+        for board in boards {
+            board.addNumber(bingoNumber)
+            if board.winner {
+                /// to be set only once
+                if solutionDay2a == nil {
+                    solutionDay2a = board.score
+                }
+                /// it will be set multiple times - I will keep the last!
+                solutionDay2b = board.score
+                /// boards will get less and less - the winning are removed- looking for the last winning board!
+                if let index = boards.firstIndex(of: board) {
+                    boards.remove(at: index)
+                }
             }
-           
-            // break outerloop
         }
     }
-    
-    
-}
-    
-    
-    print("Solution day2 - Part1: \(solutionDay2a)")
-    
-    
-    let solutionDay2b = 0
-    
+    print("Solution day2 - Part1: \(solutionDay2a ?? 0)")
     print("Solution day2 - Part2: \(solutionDay2b)")
 }
 
 /// I assume a bingo biard will be like in both example and challenge 5 x 5
 class Board: Equatable {
     let id = UUID()
-    static func == (lhs: Board, rhs: Board) -> Bool {
-        lhs.id == rhs.id
-    }
-    
+    /// conformance to equatable
+    static func == (lhs: Board, rhs: Board) -> Bool {lhs.id == rhs.id}
     var rows: [[Int]]
     var columns: [[Int]] {
         var cols: [[Int]] = []
@@ -64,29 +52,12 @@ class Board: Equatable {
     var lastDrawnNumber: Int = -1
     var winner: Bool {
         for row in rows {
-            let a = Set(drawnNumbers).intersection(Set(row))
-            if a.count == 5 {
-                print(a)
-                let notMarked = Set(allMyBoardNumbers).subtracting(row).subtracting(drawnNumbers)
-                print("notMarked \(notMarked)")
-                print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
-                self.score = Array(notMarked).reduce(0, +) * lastDrawnNumber
-                print("score \(score)")
-                return true
-            }
+            if checkIfRowOrColumnIsWinning(numbers: row) { return true}
         }
         for col in columns {
-            let a = Set(drawnNumbers).intersection(Set(col))
-            if a.count == 5 {
-                print(a)
-                let notMarked = Set(allMyBoardNumbers).subtracting(col).subtracting(drawnNumbers)
-                print("notMarked \(notMarked)")
-                print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
-                self.score = Array(notMarked).reduce(0, +) * lastDrawnNumber
-                print("score \(score)")
-                return true
-            }
+            if checkIfRowOrColumnIsWinning(numbers: col) { return true}
         }
+        /// no winner yet
         return false
     }
     var score : Int = 0
@@ -105,6 +76,20 @@ class Board: Equatable {
     func addNumber(_ num: Int) {
         lastDrawnNumber = num
         drawnNumbers.append(num)
+    }
+    
+    func checkIfRowOrColumnIsWinning(numbers: [Int]) -> Bool {
+        let a = Set(drawnNumbers).intersection(Set(numbers))
+        if a.count == 5 {
+            print(a)
+            let notMarked = Set(allMyBoardNumbers).subtracting(numbers).subtracting(drawnNumbers)
+            print("notMarked \(notMarked)")
+            print("Array(notMarked).reduce(0, +) \(Array(notMarked).reduce(0, +)) * lastDrawnNumber \(lastDrawnNumber)")
+            self.score = Array(notMarked).reduce(0, +) * lastDrawnNumber
+            print("score \(score)")
+            return true
+        }
+        return false
     }
 }
 
