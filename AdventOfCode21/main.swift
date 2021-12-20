@@ -21,4 +21,6 @@ let arguments = CommandLine.arguments
 //day1()
 //day2()
 //day3()
-day5()
+//day4()
+
+//day5()
