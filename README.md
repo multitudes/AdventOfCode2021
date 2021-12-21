@@ -17,7 +17,7 @@
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️|⭐️|
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|⭐️|⭐️|
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|⭐️|⭐️|
-| ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|||
+| ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|⭐️|⭐️|
 | ✅ [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7)|||
 | ✅ [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8)|||
 | ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|||
@@ -373,3 +373,83 @@ I made a small app in SwiftUI to visualize the lines using the canvas view:
   <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1640006196121/3bLORvK_N.png" width="200"  title="solution view">
 </p>
 <br></br>
+
+## Day 6
+
+Probably a classic problem of exponential growth. I have been warned at teh beginning that it might be exponential.  
+My code at first looked like this, with a iterator returning a new array with each iterator... I passed part 1 easily but part two made my MBP M1 Pro get hot for the first time!  
+I realised the solution I had in part 1 was not scalable. I roughly calculatedit would take a day to get the result... Took pen and paper and jotted something. I realised soon that if I put the numbers of the fishes per day in an the array, every iteration would just shift the array!   
+So the input example was `[3,4,3,1,2]`, this in a week array where index zero is the day zero etc would give `[0, 1, 1, 2, 1, 0, 0]`, and the next day : `[1, 1, 2, 1, 0, 0, 0]`. At this point the fishes at position zero would spawn and create a new fish, I crated a kindergarten array for this. It takes 2 iteration to get the young fish to a teenager state from `[0, 0, 1]` , to `[0, 1, 0]` and finally `[1, 0, 0]` at which point I add the kindergarden position zero to the main school array at position 6...
+This is the code for my iterator: 
+
+```swift
+struct Spawn: Sequence {
+    let seed: [Int]
+    
+    func makeIterator() -> SpawnIterator {
+        return SpawnIterator(self)
+    }
+}
+
+struct SpawnIterator: IteratorProtocol {
+    var times = 80
+    /// reserving place
+    var week: [Int]
+    var kindergarden: [Int] = []
+    
+    var readyToSpawn: Int = 0
+    var teens: Int = 0 // the fishes that graduate from kindergarden
+    
+    init(_ spawn: Spawn) {
+        week = Array(repeating: 0, count: 7)
+        kindergarden = Array(repeating: 0, count: 3)
+        /// init my week array transferring the values from
+        for timeLeftToSpawn in seed { week[timeLeftToSpawn] += 1 }
+    }
+    
+    /// lets return a tuple, because at the end I need to count all fishes in both arrays
+    mutating func next() -> (kindergarden: [Int], teens: [Int])? {
+        defer { times -= 1 }
+        guard times > 0 else { return nil }
+        /// here the order matters a lot!
+        readyToSpawn = week[0]
+        kindergarden = kindergarden.shiftRight()
+        week = week.shiftRight()
+        kindergarden[2] = readyToSpawn
+        /// check if someone finished kindergarden
+        teens = kindergarden[0]
+        /// if so merge with the other fishes at day 6
+        week[6] = week[6] + teens
+        /// and reset because they do not want to be shifted back to kindergarden day -2
+        kindergarden[0] = 0
+        return (kindergarden, week)
+    }
+}
+
+```
+
+for part one:  
+```swift
+let glowingLanternfishesSchool = Spawn(seed: seed )
+for (i, spawn) in glowingLanternfishesSchool.enumerated() {
+   print("\(i) \(spawn.0) \(spawn.1)")
+    if i == 79 {
+        print(spawn.0.reduce(0,+) + spawn.1.reduce(0,+) )
+    }
+}
+```
+and part two will be same but using 256 in the iterator and in the loop.
+```swift
+let glowingLanternfishesSchool = Spawn(seed: input )
+
+for (index, spawn) in glowingLanternfishesSchool.enumerated() {
+    if index == 79 {
+        solutionDay6a = spawn.kindergarden.reduce(0,+) + spawn.teens.reduce(0,+)
+    }
+    if index == 255 {
+        solutionDay6b = spawn.kindergarden.reduce(0,+) + spawn.teens.reduce(0,+)
+    }
+}
+print("Solution day2 - Part1: \(solutionDay6a)")
+print("Solution day2 - Part2: \(solutionDay6b)")
+```
