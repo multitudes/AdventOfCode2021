@@ -438,3 +438,17 @@ for (i, spawn) in glowingLanternfishesSchool.enumerated() {
 }
 ```
 and part two will be same but using 256 in the iterator and in the loop.
+```swift
+let glowingLanternfishesSchool = Spawn(seed: input )
+
+for (index, spawn) in glowingLanternfishesSchool.enumerated() {
+    if index == 79 {
+        solutionDay6a = spawn.kindergarden.reduce(0,+) + spawn.week.reduce(0,+)
+    }
+    if index == 255 {
+        solutionDay6b = spawn.kindergarden.reduce(0,+) + spawn.week.reduce(0,+)
+    }
+}
+print("Solution day2 - Part1: \(solutionDay6a)")
+print("Solution day2 - Part2: \(solutionDay6b)")
+```
