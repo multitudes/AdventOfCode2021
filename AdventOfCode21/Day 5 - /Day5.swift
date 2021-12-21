@@ -30,25 +30,16 @@ func day5() {
     let canvasWidth: Int = input.reduce(0) { max($0, Int($1.highestX)) }
     let canvasHeight: Int = input.reduce(0) { Int(max($0, Int($1.highestY))) }
     print("canvasWidth \(canvasWidth), canvasHeight \(canvasHeight)")
-    //    let inputEQ: [Line] = input.map {
-    //        let pointA = CGPoint(x: $0.points[0].x/Double(canvasWidth), y: $0.points[0].y/Double(canvasHeight))
-    //        let pointB = CGPoint(x: $0.points[1].x/Double(canvasWidth), y: $0.points[1].y/Double(canvasHeight))
-    //        return Line(pointA: pointA, pointB: pointB) }
-    //    dump(inputEQ)
-    
     /// the lines will have int points for the challenge!
     /// fill the lines with points . only horiz and vert ones
     let lines: [Line] = input.filter {
         $0.orientation == .horizontal || $0.orientation == .vertical
     }
     
-    
     let solutionDay2a = checkIntersections(for: lines)
     print("Solution day2 - Part1: \(solutionDay2a)")
 
-    
     let solutionDay2b = checkIntersections(for: input)
-    
     print("Solution day2 - Part2: \(solutionDay2b)")
 }
 
