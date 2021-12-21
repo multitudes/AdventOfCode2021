@@ -429,7 +429,7 @@ struct SpawnIterator: IteratorProtocol {
 ```
 
 for part one:  
-```
+```swift
 let glowingLanternfishesSchool = Spawn(seed: seed )
 for (i, spawn) in glowingLanternfishesSchool.enumerated() {
    print("\(i) \(spawn.0) \(spawn.1)")
