@@ -17,7 +17,7 @@
 | ✅ [Day 3: Binary Diagnostic](https://adventofcode.com/2021/day/3)|⭐️|⭐️|
 | ✅ [Day 4: Giant Squid](https://adventofcode.com/2021/day/4)|⭐️|⭐️|
 | ✅ [Day 5: Hydrothermal Venture](https://adventofcode.com/2021/day/5)|⭐️|⭐️|
-| ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|⭐️||
+| ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|⭐️|⭐️|
 | ✅ [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7)|||
 | ✅ [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8)|||
 | ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|||
@@ -390,6 +390,7 @@ struct Spawn: Sequence {
         return SpawnIterator(self)
     }
 }
+
 struct SpawnIterator: IteratorProtocol {
     var times = 80
     /// reserving place
@@ -407,7 +408,7 @@ struct SpawnIterator: IteratorProtocol {
     }
     
     /// lets return a tuple, because at the end I need to count all fishes in both arrays
-    mutating func next() -> (kindergarden: [Int], week: [Int])? {
+    mutating func next() -> (kindergarden: [Int], teens: [Int])? {
         defer { times -= 1 }
         guard times > 0 else { return nil }
         /// here the order matters a lot!
@@ -443,10 +444,10 @@ let glowingLanternfishesSchool = Spawn(seed: input )
 
 for (index, spawn) in glowingLanternfishesSchool.enumerated() {
     if index == 79 {
-        solutionDay6a = spawn.kindergarden.reduce(0,+) + spawn.week.reduce(0,+)
+        solutionDay6a = spawn.kindergarden.reduce(0,+) + spawn.teens.reduce(0,+)
     }
     if index == 255 {
-        solutionDay6b = spawn.kindergarden.reduce(0,+) + spawn.week.reduce(0,+)
+        solutionDay6b = spawn.kindergarden.reduce(0,+) + spawn.teens.reduce(0,+)
     }
 }
 print("Solution day2 - Part1: \(solutionDay6a)")
