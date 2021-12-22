@@ -68,6 +68,7 @@
 		455A299627734B4400EFFBF9 /* input-8a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-8a.txt"; sourceTree = "<group>"; };
 		455A299727734B4400EFFBF9 /* input-8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-8.txt"; sourceTree = "<group>"; };
 		455A299A27734B4600EFFBF9 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
+		4585E6662773904300249677 /* binaryMadness.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = binaryMadness.playground; sourceTree = "<group>"; };
 		45C7FE1B276E47F200CD998F /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
 		45C7FE1C276E490800CD998F /* input-2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "input-2.txt"; sourceTree = "<group>"; };
 		45C7FE21276E65CC00CD998F /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		4508C4F7275A8AE500201382 = {
 			isa = PBXGroup;
 			children = (
+				4585E6662773904300249677 /* binaryMadness.playground */,
 				4508C502275A8AE500201382 /* AdventOfCode21 */,
 				4508C501275A8AE500201382 /* Products */,
 				45CE3A3F275A9AE70087F81A /* Frameworks */,
