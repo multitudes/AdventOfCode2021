@@ -36,11 +36,11 @@ func day5() {
         $0.orientation == .horizontal || $0.orientation == .vertical
     }
     
-    let solutionDay2a = checkIntersections(for: lines)
-    print("Solution day2 - Part1: \(solutionDay2a)")
+    let solutionDay5a = checkIntersections(for: lines)
+    print("Solution day5 - Part1: \(solutionDay5a)")
 
-    let solutionDay2b = checkIntersections(for: input)
-    print("Solution day2 - Part2: \(solutionDay2b)")
+    let solutionDay5b = checkIntersections(for: input)
+    print("Solution day5 - Part2: \(solutionDay5b)")
 }
 
 struct Point : Hashable {

@@ -31,11 +31,11 @@ func day7() {
     }
     
 
-    var solutionDay6a = lowestFuelYet
-    var solutionDay6b = 0
+    var solutionDay7a = lowestFuelYet
+    var solutionDay7b = 0
     
-    print("Solution day2 - Part1: \(solutionDay6a)")
-    print("Solution day2 - Part2: \(solutionDay6b)")
+    print("Solution day7 - Part1: \(solutionDay7a)")
+    print("Solution day7 - Part2: \(solutionDay7b)")
 }
 
 func getTheFuelNeededFor(position: Int, in crabsDistribution: [Int]) -> Int {

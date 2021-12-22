@@ -24,8 +24,8 @@ func day6() {
             solutionDay6b = spawn.kindergarden.reduce(0,+) + spawn.teens.reduce(0,+)
         }
     }
-    print("Solution day2 - Part1: \(solutionDay6a)")
-    print("Solution day2 - Part2: \(solutionDay6b)")
+    print("Solution day6 - Part1: \(solutionDay6a)")
+    print("Solution day6 - Part2: \(solutionDay6b)")
 }
 
 struct Spawn: Sequence {

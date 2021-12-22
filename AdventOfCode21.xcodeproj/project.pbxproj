@@ -22,6 +22,9 @@
 		455A2992277229B000EFFBF9 /* input-7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 455A2991277229B000EFFBF9 /* input-7.txt */; };
 		455A2993277229B600EFFBF9 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455A29902772296700EFFBF9 /* Day7.swift */; };
 		455A2995277229EC00EFFBF9 /* input-7a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 455A2994277229EC00EFFBF9 /* input-7a.txt */; };
+		455A299827734B4400EFFBF9 /* input-8a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 455A299627734B4400EFFBF9 /* input-8a.txt */; };
+		455A299927734B4400EFFBF9 /* input-8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 455A299727734B4400EFFBF9 /* input-8.txt */; };
+		455A299C27734B4900EFFBF9 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455A299A27734B4600EFFBF9 /* Day8.swift */; };
 		45C7FE1D276E491200CD998F /* input-2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45C7FE1C276E490800CD998F /* input-2.txt */; };
 		45C7FE20276E500500CD998F /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7FE1B276E47F200CD998F /* Day2.swift */; };
 		45C7FE22276E65DA00CD998F /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7FE21276E65CC00CD998F /* Day3.swift */; };
@@ -62,6 +65,9 @@
 		455A29902772296700EFFBF9 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
 		455A2991277229B000EFFBF9 /* input-7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-7.txt"; sourceTree = "<group>"; };
 		455A2994277229EC00EFFBF9 /* input-7a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-7a.txt"; sourceTree = "<group>"; };
+		455A299627734B4400EFFBF9 /* input-8a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-8a.txt"; sourceTree = "<group>"; };
+		455A299727734B4400EFFBF9 /* input-8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-8.txt"; sourceTree = "<group>"; };
+		455A299A27734B4600EFFBF9 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
 		45C7FE1B276E47F200CD998F /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
 		45C7FE1C276E490800CD998F /* input-2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "input-2.txt"; sourceTree = "<group>"; };
 		45C7FE21276E65CC00CD998F /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
@@ -202,8 +208,8 @@
 		45C7FE08276E474100CD998F /* Day 7 -  */ = {
 			isa = PBXGroup;
 			children = (
-				455A2994277229EC00EFFBF9 /* input-7a.txt */,
 				455A29902772296700EFFBF9 /* Day7.swift */,
+				455A2994277229EC00EFFBF9 /* input-7a.txt */,
 				455A2991277229B000EFFBF9 /* input-7.txt */,
 			);
 			path = "Day 7 - ";
@@ -212,6 +218,9 @@
 		45C7FE09276E474800CD998F /* Day 8 -  */ = {
 			isa = PBXGroup;
 			children = (
+				455A299A27734B4600EFFBF9 /* Day8.swift */,
+				455A299727734B4400EFFBF9 /* input-8.txt */,
+				455A299627734B4400EFFBF9 /* input-8a.txt */,
 			);
 			path = "Day 8 - ";
 			sourceTree = "<group>";
@@ -435,8 +444,10 @@
 				451524F82770F98500BF35B8 /* input-6a.txt in Resources */,
 				455A2995277229EC00EFFBF9 /* input-7a.txt in Resources */,
 				4508C515275A904100201382 /* input.txt in Resources */,
+				455A299827734B4400EFFBF9 /* input-8a.txt in Resources */,
 				453C179E276FAC5B0023C08C /* input-4.txt in Resources */,
 				451524F32770F8CE00BF35B8 /* input-6.txt in Resources */,
+				455A299927734B4400EFFBF9 /* input-8.txt in Resources */,
 				45FCF41E2770C53700E1822E /* input-4a.txt in Resources */,
 				4543A41E276F7FC000D0FF32 /* input-5a.txt in Resources */,
 				4543A41D276F7FBE00D0FF32 /* input-5.txt in Resources */,
@@ -459,6 +470,7 @@
 				45C7FE20276E500500CD998F /* Day2.swift in Sources */,
 				45C7FE22276E65DA00CD998F /* Day3.swift in Sources */,
 				451524F62770F96D00BF35B8 /* Day6.swift in Sources */,
+				455A299C27734B4900EFFBF9 /* Day8.swift in Sources */,
 				45510916275B85E900DD5BD6 /* Day1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
