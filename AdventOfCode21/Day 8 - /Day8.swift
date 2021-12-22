@@ -29,7 +29,7 @@ func day8() {
     let input: [(a: String, b: String)] = getInputDay8()
     
     /// part 1!
-    let solutionDay8a = input.map { $0.1 }
+    let solutionDay8a = input.map { $0.b }
         .reduce(0) {
             return $0 + $1
                 .trimmingCharacters(in: .whitespaces)
@@ -44,54 +44,54 @@ func day8() {
     
     /// part 2!
     var solutionDay8b = 0
-
+    
     for line in input {
         
         /// init my dict - it will be overwritten everyline...
         var dict: [String: String] = [:]
-
+        
         var linePartA = line.a.trimmingCharacters(in: .whitespaces)
             .components(separatedBy: .whitespaces)
-        //var linePartA = ["acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab"]
-        var linePartB = line.b.trimmingCharacters(in: .whitespaces)
+        let linePartB = line.b.trimmingCharacters(in: .whitespaces)
             .components(separatedBy: .whitespaces)
         
-        /// first pass - the first part is the list of the 10 digits "codes"
+        /// first pass - the first part of the line, `linePartA`is the list of the 10 digits "codes" I need to decode the second part of the line.
+        /// The first digits are easy
         for segments in linePartA {
             
-            let digit: SegmentCount = SegmentCount(digit: segments)
+            let segmentCount: SegmentCount = SegmentCount(digit: segments)
             
-            switch digit { // like .two segments
-            case  .two:
+            if segmentCount == .two {
                 for entry in segments.permutations() {
                     dict[String(entry)] = "1"
                 }
                 linePartA.remove(element: segments)
-            case .three:
+            }
+            if segmentCount == .three {
                 for entry in segments.permutations() {
                     dict[String(entry)] = "7"
                 }
                 linePartA.remove(element: segments)
-                
-            case .four:
+            }
+            if segmentCount == .four {
                 for entry in segments.permutations() {
                     dict[String(entry)] = "4"
                 }
                 linePartA.remove(element: segments)
-            case .seven:
+            }
+            if segmentCount == .seven {
                 for entry in segments.permutations() {
                     dict[String(entry)] = "8"
                 }
                 linePartA.remove(element: segments)
-            case .five, .six:
-                break
             }
         }
         
-        /// second pass
+        /// second pass. I can get number `3` The only one which has 5 segments and is a superset of the segments needed for `1`
+        /// . Of course `7`, `4`, `3` are already removed
         for segments in linePartA {
-            let digit: SegmentCount = SegmentCount(digit: segments)
-            if digit == .five {
+            let segmentCount: SegmentCount = SegmentCount(digit: segments)
+            if segmentCount == .five {
                 if Set(segments).isSuperset(of: Set(dict.keyFor(value: "1"))){
                     for entry in segments.permutations() {
                         dict[String(entry)] = "3"
@@ -101,10 +101,10 @@ func day8() {
             }
         }
         
-        /// het the remaining 5 and 2
+        /// het the remaining `5` and `2` which have `5` segments and `5` is found by subtracting the segments used for `3` and checking if it is a subset of `4`
         for segments in linePartA {
-            let digit: SegmentCount = SegmentCount(digit: segments)
-            if digit == .five {
+            let segmentCount: SegmentCount = SegmentCount(digit: segments)
+            if segmentCount == .five {
                 if Set(segments).subtracting(Set(dict.keyFor(value: "3"))).isSubset(of: Set(dict.keyFor(value: "4"))) {
                     for entry in segments.permutations() {
                         dict[String(entry)] = "5"
@@ -119,10 +119,10 @@ func day8() {
             }
         }
         
-        /// het the remaining 9
+        /// get `9` . At this stage the only one which is the union of the elements needed for `3` and `5`
         for segments in linePartA {
-            let digit: SegmentCount = SegmentCount(digit: segments)
-            if digit == .six {
+            let segmentCount: SegmentCount = SegmentCount(digit: segments)
+            if segmentCount == .six {
                 if Set(segments) ==
                     Set(dict.keyFor(value: "3")).union(Set(dict.keyFor(value: "5"))) {
                     for entry in segments.permutations() {
@@ -134,10 +134,10 @@ func day8() {
         }
         
         
-        /// het the remaining 6 and 0
+        /// get the remaining `6` and `0`
         for segments in linePartA {
-            let digit: SegmentCount = SegmentCount(digit: segments)
-            if digit == .six {
+            let segmentCount: SegmentCount = SegmentCount(digit: segments)
+            if segmentCount == .six {
                 if Set(segments) == Set(dict.keyFor(value: "8")).subtracting(Set(dict.keyFor(value: "1"))).union( Set(dict.keyFor(value: "5")))   {
                     for entry in segments.permutations() {
                         dict[String(entry)] = "6"
@@ -152,14 +152,14 @@ func day8() {
             }
         }
         
+        /// at the end of each line I get the 4 digits using the dict and adding it to the total
         var solutionString = ""
-
-        for num in linePartB {
-            solutionString += dict[num] ?? ""
+        for digit in linePartB {
+            solutionString += dict[digit] ?? ""
         }
         solutionDay8b += Int(solutionString)!
     }
-
+    
     
     print("Solution day8 - Part1: \(solutionDay8a)")
     print("Solution day8 - Part2: \(solutionDay8b)")
@@ -173,20 +173,14 @@ func getInputDay8() -> [(String,String)] {
         let bundleURL = URL(fileURLWithPath: "ResourceBundle.bundle", relativeTo: currentDirectory)
         let bundle = Bundle(url: bundleURL)
         if let inputFileURL = bundle?.url(forResource: "input-8a", withExtension: "txt") {
-            let charSet = CharacterSet(charactersIn: "|")
             do {
                 input = try String(contentsOf: inputFileURL)
                     .trimmingCharacters(in: .newlines)
                     .components(separatedBy: .newlines)
-                
                     .map {
                         let splitString = $0.components(separatedBy: "|" )
-                        print(splitString[0])
-                        print(splitString[1])
-                        let (a,b) : (a: String,b: String) = (a:splitString[0],b: splitString[1])
-                        return (a:a,b:b)
-                        }
-              
+                        return (a:splitString[0],b: splitString[1])
+                    }
             } catch {
                 print(error.localizedDescription)
             }
