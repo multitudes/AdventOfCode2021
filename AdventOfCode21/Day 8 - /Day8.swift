@@ -13,22 +13,18 @@ func day8() {
     let input: [(a: String, b: String)] = getInputDay8()
     print(input)
     let solutionDay8a = input.map { $0.1 }
-        .reduce(0) { (acc, val) in
-            //print($1)
-            let components = val // $1 was a string
+        .reduce(0) {
+            return $0 + $1
                 .trimmingCharacters(in: .whitespaces)
                 .components(separatedBy: .whitespaces)
-            print(components) // - gets to be an array
-            let partial = components.reduce(0) {
-                print($1)
-                if $1.count == 2 || $1.count == 3 || $1.count == 4 || $1.count == 7 {
-                    return $0 + 1
+                .reduce(0) {
+                    if $1.count == 2 || $1.count == 3 || $1.count == 4 || $1.count == 7 {
+                        return $0 + 1
+                    }
+                    return $0
                 }
-                return $0
-            }
-            print("partial \(partial)")
-            return acc + partial
         }
+    
     
 
     var solutionDay8b = 0
