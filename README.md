@@ -453,8 +453,27 @@ for (index, spawn) in glowingLanternfishesSchool.enumerated() {
 print("Solution day2 - Part1: \(solutionDay6a)")
 print("Solution day2 - Part2: \(solutionDay6b)")
 ```
-## Day 8
+## Day 8 - Seven Segment Search
 
+```
+  0:      1:      2:      3:      4:
+ aaaa    ....    aaaa    aaaa    ....
+b    c  .    c  .    c  .    c  b    c
+b    c  .    c  .    c  .    c  b    c
+ ....    ....    dddd    dddd    dddd
+e    f  .    f  e    .  .    f  .    f
+e    f  .    f  e    .  .    f  .    f
+ gggg    ....    gggg    gggg    ....
+
+  5:      6:      7:      8:      9:
+ aaaa    aaaa    aaaa    aaaa    aaaa
+b    .  b    .  .    c  b    c  b    c
+b    .  b    .  .    c  b    c  b    c
+ dddd    dddd    ....    dddd    dddd
+.    f  e    f  .    f  e    f  .    f
+.    f  e    f  .    f  e    f  .    f
+ gggg    gggg    ....    gggg    gggg
+```
 Day 8 was hard. I had no idea how to solve it at first. This is a good example how it is important to just start. Part 1 was easy but I was afraif of part 2! Turns out that he gave a hint in part 2! So I managed to solve it. Still it has been a bit of a pain. At first I thought a bijective dictionary was what I needed, then I realised that using the segments as keys, since they can come as "ab" or "ba", I had to save all permutation of the segments for a particular value... So I could then get the value with `dict["ab"]` or `dict["ba"]` :) The rest has been playing with sets subtracting and adding segments...
 
 Part one was just counting the values we already knew. Since there are only 1 digit with 2 led segments and 1 digit with three etc.
@@ -574,4 +593,13 @@ for segments in linePartA {
         }
     }
 }
+```
+After this I just get the result using the dict and keep a grand total running
+```swift
+/// at the end of each line I get the 4 digits using the dict and adding it to the total
+var solutionString = ""
+for digit in linePartB {
+    solutionString += dict[digit] ?? ""
+}
+solutionDay8b += Int(solutionString)! /// yes unwrapping is safe here :)
 ```
