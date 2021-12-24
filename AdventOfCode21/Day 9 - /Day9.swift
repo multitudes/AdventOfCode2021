@@ -64,7 +64,7 @@ func day9() {
 }
 
 let solutionDay9a = lowPoints.reduce(0) { $0 + $1 + 1 }
-var solutionDay9b = basins.sorted(){ $0 > $1 }.prefix(3).reduce(1, *)
+let solutionDay9b = basins.sorted(){ $0 > $1 }.prefix(3).reduce(1, *)
 
 print("Solution day9 - Part1: \(solutionDay9a)")
 print("Solution day9 - Part2: \(solutionDay9b)")
