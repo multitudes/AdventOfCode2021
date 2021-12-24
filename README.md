@@ -603,3 +603,43 @@ for digit in linePartB {
 }
 solutionDay8b += Int(solutionString)! /// yes unwrapping is safe here :)
 ```
+
+## Day 9
+
+Ah recursion. It is beautiful when it works :)  
+The code is short. I look for the lowest points after padding my initial matrix. Padding allows me not to go over the index. Then when I find a low I add it to the solution for part one and at the same time I start a one liner call to a recursive function which will explore the surroundings for me until there are only 9's around, that is when it returns zero and I stop when all have returned with the amount. Quite nice short code for once!
+
+```swift
+var lowPoints: [Int] = []
+var basins: [Int] = []
+/// after having my input padded with 9's I check the adjacent and look for lowest
+for i in 1..<input.count + 1 {
+    for k in 1..<digitsInRow + 1 {
+        print("\(i) \(k) \(matrix[i].map({String($0)}).joined())")
+        // check the four directions
+        if matrix[i][k] < matrix[i-1][k] &&
+            matrix[i][k] < matrix[i][k-1] &&
+            matrix[i][k] < matrix[i][k+1] &&
+            matrix[i][k] < matrix[i+1][k]
+        {
+            print("low point! \(matrix[i][k])")
+            /// This for part one of the challenge
+            lowPoints.append(matrix[i][k])
+
+            var size = getNextLowRecursive(matrix: &matrix, i: i, k: k)
+            
+            func getNextLowRecursive(matrix: inout [[Int]], i: Int, k: Int) -> Int {
+                /// this is our escape from looping to death
+                if matrix[i][k] == 9 { return 0 }
+                /// put myself to 9 - already visited
+                matrix[i][k] = 9
+                ///explore the other lows adding 1 because I had just one low
+                return 1 +
+                getNextLowRecursive(matrix: &matrix, i: i - 1, k: k) +
+                getNextLowRecursive(matrix: &matrix, i: i, k: k - 1) +
+                getNextLowRecursive(matrix: &matrix, i: i, k: k + 1) +
+                getNextLowRecursive(matrix: &matrix, i: i + 1, k: k)
+            }
+        basins.append(size)
+    }
+}
