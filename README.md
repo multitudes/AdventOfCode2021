@@ -20,7 +20,7 @@
 | ✅ [Day 6: Lanternfish](https://adventofcode.com/2021/day/6)|⭐️|⭐️|
 | ✅ [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7)|⭐️|⭐️|
 | ✅ [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8)|⭐️|⭐️|
-| ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|||
+| ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|⭐️|⭐️|
 | ✅ [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10)|||
 | ✅ [Day 11: Dumbo Octopus](https://adventofcode.com/2021/day/11)|||
 
@@ -626,7 +626,7 @@ for i in 1..<input.count + 1 {
             /// This for part one of the challenge
             lowPoints.append(matrix[i][k])
 
-            var size = getNextLowRecursive(matrix: &matrix, i: i, k: k)
+            let size = getNextLowRecursive(matrix: &matrix, i: i, k: k)
             
             func getNextLowRecursive(matrix: inout [[Int]], i: Int, k: Int) -> Int {
                 /// this is our escape from looping to death
@@ -643,3 +643,6 @@ for i in 1..<input.count + 1 {
         basins.append(size)
     }
 }
+let solutionDay9a = lowPoints.reduce(0) { $0 + $1 + 1 }
+let solutionDay9b = basins.sorted(){ $0 > $1 }.prefix(3).reduce(1, *)
+```
