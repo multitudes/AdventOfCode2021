@@ -45,7 +45,7 @@ func day10() {
     //var bracketDict: [Character : Int] = [:]
     var points: Int = 0
     var cumulativeStack: [Character] = []
-    
+
     outer:for row in input {
         print(row)
         cumulativeStack = []
@@ -104,8 +104,8 @@ func day10() {
             }
         }
         /// here I can deal with the autocomplete
-//        print("cumulativeStack \(cumulativeStack)\n")
-//        print("\nincomplete \(row) \n")
+    //        print("cumulativeStack \(cumulativeStack)\n")
+    //        print("\nincomplete \(row) \n")
         var autocompleteArray: [Character] = []
         while !cumulativeStack.isEmpty {
             if let last = cumulativeStack.popLast() {
