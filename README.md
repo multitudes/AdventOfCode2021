@@ -674,7 +674,7 @@ let illegalCharDict: [Character: Int] = [
     ]
 ```
 Then I kept a stack with the characters which were not yet closed. Not difficult. Whena row in the inpit revelas to be corrupted I continue to the next row and remove the corrupted row.
-
+I noticed that I am repeating some code but the `continue outer` cannot be pit in a function I believe? Not sure, I could try with a closure maybe...
 ```swift
 var cumulativeStack: [Character] = []
 
