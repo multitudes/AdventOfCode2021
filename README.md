@@ -643,3 +643,6 @@ for i in 1..<input.count + 1 {
         basins.append(size)
     }
 }
+let solutionDay9a = lowPoints.reduce(0) { $0 + $1 + 1 }
+let solutionDay9b = basins.sorted(){ $0 > $1 }.prefix(3).reduce(1, *)
+```
