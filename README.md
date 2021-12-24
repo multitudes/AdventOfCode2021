@@ -646,3 +646,116 @@ for i in 1..<input.count + 1 {
 let solutionDay9a = lowPoints.reduce(0) { $0 + $1 + 1 }
 let solutionDay9b = basins.sorted(){ $0 > $1 }.prefix(3).reduce(1, *)
 ```
+
+## day 10
+
+For this one I made three dictionaries to store the different scores and the replacements for chars. I also utilised the `Character` swift type instead of `String`.  
+
+```string
+let illegalCharDict: [Character: Int] = [
+        ")": 3,
+        "]": 57,
+        "}": 1197,
+        ">": 25137
+    ]
+    
+    let autocompleteScores: [Character: Int] = [
+        ")": 1,
+        "]": 2,
+        "}": 3,
+        ">": 4
+    ]
+    
+    let closingCharacterDict: [Character: Character] = [
+        "(": ")",
+        "[": "]",
+        "{": "}",
+        "<": ">"
+    ]
+```
+Then I kept a stack with the characters which were not yet closed. Not difficult. Whena row in the inpit revelas to be corrupted I continue to the next row and remove the corrupted row.
+
+```swift
+var cumulativeStack: [Character] = []
+
+outer:for row in input {
+    print(row)
+    cumulativeStack = []
+    for char in row {
+        /// check if opening bracket
+        if keys.contains(char) {
+            //bracketDict[char, default: 0] += 1
+            cumulativeStack.append(char)
+            print(cumulativeStack)
+        } else {
+            /// it has to be a closing one
+            if let lastBracket = cumulativeStack.last {
+                switch char {
+                case ")":
+                    if lastBracket != "(" {
+                        points += illegalCharDict[char, default: 0]
+                        input.remove(element: row)
+                        //print("\ncorrupted \(row) \n")
+                        continue outer// to next row
+                    } else {
+                        _ = cumulativeStack.popLast()
+                    }
+                case "}":
+                    if lastBracket != "{" {
+                        points += illegalCharDict[char, default: 0]
+                        input.remove(element: row)
+                        //print("\ncorrupted \(row) \n")
+                        continue outer// to next row
+                    } else {
+                        _ = cumulativeStack.popLast()
+                    }
+                case "]":
+                    if lastBracket != "[" {
+                        points += illegalCharDict[char, default: 0]
+                        input.remove(element: row)
+                        //print("\ncorrupted \(row) \n")
+                        continue outer // to next row
+                    } else {
+                        _ = cumulativeStack.popLast()
+                    }
+                case ">":
+                    if lastBracket != "<" {
+                        points += illegalCharDict[char, default: 0]
+                        input.remove(element: row)
+                        //print("\ncorrupted \(row) \n")
+                        continue outer // to next row
+                    } else {
+                        _ = cumulativeStack.popLast()
+                    }
+                default:
+                    print("not expected this \(char)")
+                }
+            } else {
+            print("illegal char")
+            }
+        }
+    }
+    /// here I can deal with the autocomplete
+//        print("cumulativeStack \(cumulativeStack)\n")
+//        print("\nincomplete \(row) \n")
+    var autocompleteArray: [Character] = []
+    while !cumulativeStack.isEmpty {
+        if let last = cumulativeStack.popLast() {
+            autocompleteArray.append(closingCharacterDict[last, default: Character("")])
+        }
+    }
+    print("\nautocomplete \(autocompleteArray) \n")
+    
+    /// calculate score for row
+    var score = 0
+    for char in autocompleteArray {
+        score *= 5
+        score += autocompleteScores[char, default: 0]
+    }
+    totalScoresArray.append(score)
+}
+totalScoresArray = totalScoresArray.sorted()
+
+let solutionDay10a = points
+let solutionDay10b = totalScoresArray[Int(totalScoresArray.count / 2)]
+```
