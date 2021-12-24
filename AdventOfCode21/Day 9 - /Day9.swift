@@ -44,7 +44,7 @@ func day9() {
                 /// This for part one of the challenge
                 lowPoints.append(matrix[i][k])
 
-                var size = getNextLowRecursive(matrix: &matrix, i: i, k: k)
+                let size = getNextLowRecursive(matrix: &matrix, i: i, k: k)
                 
                 func getNextLowRecursive(matrix: inout [[Int]], i: Int, k: Int) -> Int {
                     /// this is our escape from looping to death
