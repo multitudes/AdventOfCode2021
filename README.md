@@ -21,7 +21,7 @@
 | ✅ [Day 7: The Treachery of Whales](https://adventofcode.com/2021/day/7)|⭐️|⭐️|
 | ✅ [Day 8: Seven Segment Search](https://adventofcode.com/2021/day/8)|⭐️|⭐️|
 | ✅ [Day 9: Smoke Basin](https://adventofcode.com/2021/day/9)|⭐️|⭐️|
-| ✅ [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10)|||
+| ✅ [Day 10: Syntax Scoring](https://adventofcode.com/2021/day/10)|⭐️|⭐️|
 | ✅ [Day 11: Dumbo Octopus](https://adventofcode.com/2021/day/11)|||
 
 ## Preparing the environment
