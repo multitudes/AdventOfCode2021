@@ -12,15 +12,31 @@ import Foundation
 /// I removed the newlines in file input-8a manually, as said on the website, it was only done on the example to format the text on the page but the puzzle input had no such things
 func day9() {
     let input: [String] = getInputDay9()
-    //print(input)
+    
+    print(input)
     /// part 1!
+    ///
+    ///create padding all around our matrox with 9's
+    let digitsInRow = input.first!.count
+    let firstAndLastRow: [Int] = Array(repeating: "9", count: digitsInRow + 2).compactMap { Int($0)    }
+    var matrix: [[Int]] = [firstAndLastRow]
 
+    for i in 0..<input.count {
+        var row: [Int] = input[i].compactMap { Int(String($0)) }
+        row.insert(9, at: 0)
+        row.append(9)
+        matrix.append(row)
+    }
+    matrix.append(firstAndLastRow)
+    
+    // check the adjacent and look for lowest
+    for i in
+    
+    
+    
+    
     let solutionDay9a = 0
     var solutionDay9b = 0
-
-    
-    
-    
     
     print("Solution day9 - Part1: \(solutionDay9a)")
     print("Solution day9 - Part2: \(solutionDay9b)")
