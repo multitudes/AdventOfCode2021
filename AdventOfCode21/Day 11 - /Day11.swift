@@ -24,7 +24,6 @@ let directions: [(i: Int, k: Int)] = [
     (i: -1, k: 1)
 ]
 
-/// I removed the newlines in file input-8a manually, as said on the website, it was only done on the example to format the text on the page but the puzzle input had no such things
 func day11() {
    
     //var rangeRows: ClosedRange<Int> = 0...input.count - 1
@@ -39,8 +38,8 @@ func day11() {
     var flashingArray: Array<(i: Int, k: Int)> = []
     var totalFlashes = 0
     
-    /// for part 1 I need a 100 times loop - for part two I need a while loop , but decided 1000 was enough. I break earlier with the solution
-    for time in 0..<1000 {
+        /// for part 1 I need a 100 times loop - for part two I need a while loop , but decided 1000 was enough. I break earlier with the solution
+        for time in 0..<1000 {
         for i in 0..<rows {
             for k in 0..<cols {
                 let position: (i: Int, k:Int) = (i: i, k: k)
@@ -62,7 +61,7 @@ func day11() {
         flashingArray.forEach { pos in
             matrix[pos.i][pos.k] = 0
         }
-        
+
         totalFlashes += flashingArray.count
         /// check solution part 1- after 100 times...
         if time + 1 == 100 {
