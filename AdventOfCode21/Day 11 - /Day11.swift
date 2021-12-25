@@ -13,97 +13,59 @@ extension Comparable {
     }
 }
 
+let directions: [(i: Int, k: Int)] = [
+    (i: 0, k: 1),
+    (i: 1, k: 1),
+    (i: 1, k: 0),
+    (i: 1, k: -1),
+    (i: 0, k: -1),
+    (i: -1, k: -1),
+    (i: -1, k: 0),
+    (i: -1, k: 1)
+]
+
 /// I removed the newlines in file input-8a manually, as said on the website, it was only done on the example to format the text on the page but the puzzle input had no such things
 func day11() {
-    let directions: [(i: Int, k: Int)] = [
-        (i: 0, k: 1),
-        (i: 1, k: 1),
-        (i: 1, k: 0),
-        (i: 1, k: -1),
-        (i: 0, k: -1),
-        (i: -1, k: -1),
-        (i: -1, k: 0),
-        (i: -1, k: 1)
-    ]
+   
     //var rangeRows: ClosedRange<Int> = 0...input.count - 1
     //var rangeOctopi: ClosedRange<Int> = 0...rowLength -1
-    var input: [[Int]] = getInputDay11()
+    let input: [[Int]] = getInputDay11()
+    /// I am not sure but I had race conditions without doing a copy
     var matrix = input
+    /// convenience
     let rows: Int = input.count
     let cols: Int = input.first?.count ?? 0
+    /// most important array
     var flashingArray: Array<(i: Int, k: Int)> = []
     var totalFlashes = 0
     
-    for i in 0..<rows {
-        print("row \(i)", input[i])
-    }
-    
+    /// for part 1 I need a 100 times loop - for part two I need a while loop , but decided 1000 was enough. I break earlier with the solution
     for time in 0..<1000 {
         for i in 0..<rows {
             for k in 0..<cols {
-                print("power ",matrix[i][k])
-                print("row \(i)", matrix[i])
                 let position: (i: Int, k:Int) = (i: i, k: k)
-                /// I got a 9 before incrementing - this will flash hard! 😀
-                if matrix[i][k] == 9 && !flashingArray.contains(where: { tuple in
-                    tuple.i == position.i && tuple.k == position.k
-                }) {
-                    print("flash at position \(position)")
-                    /// it will not need to flash again!
+                /// I got a 9 before incrementing - this will flash hard! 😀 - of course (!) I check if the octopus already flashed before :))
+                if matrix[i][k] == 9 &&
+                    !flashingArray.contains(where: { tuple in
+                    tuple.i == position.i && tuple.k == position.k }) {
+                    /// keep track of the octopus, it will not need to flash again!
                     flashingArray.append(position)
-                    print("flashingArray append \(position)")
-                    
-                    /// add 1 to my fellow 🐙
+                    /// add 1 power to my fellow 🐙s
                     for dir in directions {
-                        print("going dir \(dir) ")
                         /// go in the direction adding or substracting 1 and get new pos
                         let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
                         ///check bounds for new pos
-                        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 {
-                            print("\(dir) out of bounds - continue")
-                            continue }
-                        
+                        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
                         /// check if I have a 9 already at new location -
                         if matrix[newPos.i][newPos.k] == 9 {
-                            
                             /// if so I need to check if it is already activated or if it is its first time getting activated -
                             if !flashingArray.contains(where: { tuple in
                                 tuple.i == newPos.i && tuple.k == newPos.k
                             }) {
-                                print("\(newPos) got a \(matrix[newPos.i][newPos.k]) not yet flashed")
                                 /// first timer, needs to flash
                                 flashingArray.append(newPos)
+                                /// bit of recursion!
                                 checkAllDirections(position: newPos, flashingArray:  &flashingArray, matrix: &matrix )
-                                
-                                func checkAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
-                                    for dir in directions {
-                                        /// go in the direction adding or substracting 1 and get new pos
-                                        let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
-                                        ///check bounds for new pos
-                                        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
-                                        
-                                        /// check if I have a 9 already at new location -
-                                        if matrix[newPos.i][newPos.k] == 9 {
-                                            /// if so I need to check if it is already activated or if it is its first time getting activated -
-                                            if !flashingArray.contains(where: { tuple in
-                                                tuple.i == newPos.i && tuple.k == newPos.k
-                                            }) {
-                                                /// first timer, needs to flash
-                                                flashingArray.append(newPos)
-                                                checkAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
-                                            } else {
-                                                /// this will be not flashing
-                                                continue
-                                            }
-                                        } else {
-                                            /// I did not have a 9 already
-                                            /// add one energy to location
-                                            /// if after that I reached a 9 it is ok - not ready to flash!
-                                            matrix[newPos.i][newPos.k] = (matrix[newPos.i][newPos.k] + 1)
-                                        }
-                                    }
-                                    return
-                                }
                             } else {
                                 /// it is a 9  but already flashed - this will be not flashing again
                                 /// continue to next direcrion
@@ -132,22 +94,55 @@ func day11() {
         if flashingArray.count == 100 {
             print("synchronicity@@@@@@")
             print("\(time + 1) times - total \(totalFlashes)")
+            print("Solution day11 - Part2: \(time + 1)")
             break
         }
         flashingArray = []
-        print("\(time + 1) times - total \(totalFlashes)")
-        print("\n ========= \n")
-        for i in 0..<rows {
-            print("row \(i)", matrix[i])
+        if time + 1 == 100 {
+            print("Solution day11 - Part1: \(totalFlashes)")
         }
-        print("\n ========= \n\n")
+//        print("\(time + 1) times - total \(totalFlashes)")
+//        print("\n ========= \n")
+//        for i in 0..<rows {
+//            print("row \(i)", matrix[i])
+//        }
+//        print("\n ========= \n\n")
     }
-    let solutionDay11a = 0
-    let solutionDay11b = 0
-    print("Solution day11 - Part1: \(solutionDay11a)")
-    print("Solution day11 - Part2: \(solutionDay11b)")
+
+    
+    
 }
 
+func checkAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
+    let rows: Int = matrix.count
+    let cols: Int = matrix.first?.count ?? 0
+    for dir in directions {
+        /// go in the direction adding or substracting 1 and get new pos
+        let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
+        ///check bounds for new pos
+        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
+        /// check if I have a 9 already at new location -
+        if matrix[newPos.i][newPos.k] == 9 {
+            /// if so I need to check if it is already activated or if it is its first time getting activated -
+            if !flashingArray.contains(where: { tuple in
+                tuple.i == newPos.i && tuple.k == newPos.k
+            }) {
+                /// first timer, needs to flash
+                flashingArray.append(newPos)
+                checkAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
+            } else {
+                /// this will be not flashing
+                continue
+            }
+        } else {
+            /// I did not have a 9 already
+            /// add one energy to location
+            /// if after that I reached a 9 it is ok - not ready to flash!
+            matrix[newPos.i][newPos.k] = (matrix[newPos.i][newPos.k] + 1)
+        }
+    }
+    return
+}
 
 func getInputDay11() -> [[Int]] {
     var input: [[Int]] = []
