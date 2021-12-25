@@ -50,35 +50,7 @@ func day11() {
                     tuple.i == position.i && tuple.k == position.k }) {
                     /// keep track of the octopus, it will not need to flash again!
                     flashingArray.append(position)
-                    /// add 1 power to my fellow 🐙s
-                    for dir in directions {
-                        /// go in the direction adding or substracting 1 and get new pos
-                        let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
-                        ///check bounds for new pos
-                        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
-                        /// check if I have a 9 already at new location -
-                        if matrix[newPos.i][newPos.k] == 9 {
-                            /// if so I need to check if it is already activated or if it is its first time getting activated -
-                            if !flashingArray.contains(where: { tuple in
-                                tuple.i == newPos.i && tuple.k == newPos.k
-                            }) {
-                                /// first timer, needs to flash
-                                flashingArray.append(newPos)
-                                /// bit of recursion!
-                                checkAllDirections(position: newPos, flashingArray:  &flashingArray, matrix: &matrix )
-                            } else {
-                                /// it is a 9  but already flashed - this will be not flashing again
-                                /// continue to next direcrion
-                                continue
-                            }
-                        } else {
-                            /// I did not have a 9 already
-                            /// add one energy to location
-                            /// if after that I reached a 9 it is ok - not ready to flash yet!
-                            matrix[newPos.i][newPos.k] = (matrix[newPos.i][newPos.k] + 1)
-                        }
-                    }
-                    /// finished going through the neighbours
+                    checkAllDirections(position: position, flashingArray: &flashingArray, matrix: &matrix)
                 } else {
                     /// if I am here - because the octopus did not have a 9!
                     /// lets increase my energy
@@ -93,7 +65,6 @@ func day11() {
         totalFlashes += flashingArray.count
         if flashingArray.count == 100 {
             print("synchronicity@@@@@@")
-            print("\(time + 1) times - total \(totalFlashes)")
             print("Solution day11 - Part2: \(time + 1)")
             break
         }
@@ -101,16 +72,7 @@ func day11() {
         if time + 1 == 100 {
             print("Solution day11 - Part1: \(totalFlashes)")
         }
-//        print("\(time + 1) times - total \(totalFlashes)")
-//        print("\n ========= \n")
-//        for i in 0..<rows {
-//            print("row \(i)", matrix[i])
-//        }
-//        print("\n ========= \n\n")
     }
-
-    
-    
 }
 
 func checkAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
