@@ -15,6 +15,7 @@
 		451524F62770F96D00BF35B8 /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451524F42770F8D200BF35B8 /* Day6.swift */; };
 		451524F82770F98500BF35B8 /* input-6a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451524F72770F98500BF35B8 /* input-6a.txt */; };
 		4523C19A2777861F00EF2AD2 /* input-11aa.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4523C1992777861F00EF2AD2 /* input-11aa.txt */; };
+		4523C19C2777939A00EF2AD2 /* input-11.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4523C19B2777939A00EF2AD2 /* input-11.txt */; };
 		453C179E276FAC5B0023C08C /* input-4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 453C179D276FAC5B0023C08C /* input-4.txt */; };
 		45425CC227773DEC008A9F85 /* Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45425CC127773D84008A9F85 /* Day11.swift */; };
 		45425CC427773E04008A9F85 /* input-11a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45425CC327773E01008A9F85 /* input-11a.txt */; };
@@ -68,6 +69,7 @@
 		451524F42770F8D200BF35B8 /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
 		451524F72770F98500BF35B8 /* input-6a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-6a.txt"; sourceTree = "<group>"; };
 		4523C1992777861F00EF2AD2 /* input-11aa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input-11aa.txt"; path = "../../../HackingWithSwift/SwiftUI/binaryMadness.playground/Pages/octopusses.xcplaygroundpage/Resources/input-11aa.txt"; sourceTree = "<group>"; };
+		4523C19B2777939A00EF2AD2 /* input-11.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-11.txt"; sourceTree = "<group>"; };
 		453C179D276FAC5B0023C08C /* input-4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "input-4.txt"; sourceTree = "<group>"; };
 		453C179F276FAC5E0023C08C /* Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day4.swift; sourceTree = "<group>"; };
 		45425CC127773D84008A9F85 /* Day11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day11.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				45425CC127773D84008A9F85 /* Day11.swift */,
+				4523C19B2777939A00EF2AD2 /* input-11.txt */,
 				4523C1992777861F00EF2AD2 /* input-11aa.txt */,
 				45425CC327773E01008A9F85 /* input-11a.txt */,
 			);
@@ -488,6 +491,7 @@
 				455A299927734B4400EFFBF9 /* input-8.txt in Resources */,
 				45FCF41E2770C53700E1822E /* input-4a.txt in Resources */,
 				4554246D2774FEF400DBE1D5 /* input-9a.txt in Resources */,
+				4523C19C2777939A00EF2AD2 /* input-11.txt in Resources */,
 				45425CC427773E04008A9F85 /* input-11a.txt in Resources */,
 				4590D2722776445800D43E0E /* input-10.txt in Resources */,
 				4590D26E27762EA900D43E0E /* input-9aa.txt in Resources */,
