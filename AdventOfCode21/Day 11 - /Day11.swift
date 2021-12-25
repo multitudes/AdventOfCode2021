@@ -52,26 +52,31 @@ func day11() {
                     flashingArray.append(position)
                     flashInAllDirections(position: position, flashingArray: &flashingArray, matrix: &matrix)
                 } else {
-                    /// if I am here - because the octopus did not have a 9!
-                    /// lets increase my energy
+                    /// if I am here - because the octopus did not have a 9!  lets increase my energy
                     /// if after that I reached a 9 it is ok - not ready to flash!
                     matrix[i][k] = (matrix[i][k] + 1)
                 }
             }
         }
-        for pos in flashingArray {
+        /// after all this flashing the lights are reset to zero
+        flashingArray.forEach { pos in
             matrix[pos.i][pos.k] = 0
         }
+        
         totalFlashes += flashingArray.count
-        if flashingArray.count == 100 {
+        /// check solution part 1- after 100 times...
+        if time + 1 == 100 {
+            print("Solution day11 - Part1: \(totalFlashes)")
+        }
+        /// check solution part 2 - I have  `rows * cols` =  100 octopuses - if they are all in the array then
+        if flashingArray.count == rows * cols {
             print("synchronicity@@@@@@")
             print("Solution day11 - Part2: \(time + 1)")
             break
         }
+        /// reset for next round
         flashingArray = []
-        if time + 1 == 100 {
-            print("Solution day11 - Part1: \(totalFlashes)")
-        }
+
     }
 }
 
