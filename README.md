@@ -760,3 +760,42 @@ totalScoresArray = totalScoresArray.sorted()
 let solutionDay10a = points
 let solutionDay10b = totalScoresArray[Int(totalScoresArray.count / 2)]
 ```
+
+## day 11
+This one was hard or maybe my brain was foggy because of listening too much of Xmas music? Understanding the puzzle was crucial.  
+At first I did not! And this is why it took longer. Most importantly I had to check if the octopuses flashed already or not. And use recursion!  
+This is the recursive function. For every octopus I check his energy and if it is a 9 already, then I check if it had already flashed before (I keep count in an array!)
+
+```swift
+func flashInAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
+    let rows: Int = matrix.count
+    let cols: Int = matrix.first?.count ?? 0
+    /// add 1 power to my fellow 🐙s
+    for dir in directions {
+        /// go in the direction adding or substracting 1 and get new pos
+        let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
+        ///check bounds for new pos
+        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
+        /// check if I have a 9 already at new location -
+        if matrix[newPos.i][newPos.k] == 9 {
+            /// if so I need to check if it is already activated or if it is its first time getting activated -
+            if !flashingArray.contains(where: { tuple in
+                tuple.i == newPos.i && tuple.k == newPos.k
+            }) {
+                /// first timer, needs to flash
+                flashingArray.append(newPos)
+                flashInAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
+            } else {
+                /// this will be not flashing
+                continue
+            }
+        } else {
+            /// I did not have a 9 already
+            /// add one energy to location
+            /// if after that I reached a 9 it is ok - not ready to flash!
+            matrix[newPos.i][newPos.k] = (matrix[newPos.i][newPos.k] + 1)
+        }
+    }
+    return
+}
+```
