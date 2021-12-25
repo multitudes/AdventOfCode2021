@@ -760,3 +760,80 @@ totalScoresArray = totalScoresArray.sorted()
 let solutionDay10a = points
 let solutionDay10b = totalScoresArray[Int(totalScoresArray.count / 2)]
 ```
+
+## day 11
+This one was hard or maybe my brain was foggy because of listening too much of Xmas music? Understanding the puzzle was crucial.  
+At first I did not! And this is why it took longer. Most importantly I had to check if the octopuses flashed already or not. And use recursion!  
+This is the recursive function. For every octopus I check his energy and if it is a 9 already, then I check if it had already flashed before (I keep count in an array!)
+
+```swift
+func flashInAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
+    let rows: Int = matrix.count
+    let cols: Int = matrix.first?.count ?? 0
+    /// add 1 power to my fellow 🐙s
+    for dir in directions {
+        /// go in the direction adding or substracting 1 and get new pos
+        let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
+        ///check bounds for new pos
+        if newPos.i >= rows ||  newPos.k >= cols || newPos.i < 0 || newPos.k < 0 { continue }
+        /// check if I have a 9 already at new location -
+        if matrix[newPos.i][newPos.k] == 9 {
+            /// if so I need to check if it is already activated or if it is its first time getting activated -
+            if !flashingArray.contains(where: { tuple in
+                tuple.i == newPos.i && tuple.k == newPos.k
+            }) {
+                /// first timer, needs to flash
+                flashingArray.append(newPos)
+                flashInAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
+            } else {
+                /// this will be not flashing
+                continue
+            }
+        } else {
+            /// I did not have a 9 already
+            /// add one energy to location
+            /// if after that I reached a 9 it is ok - not ready to flash!
+            matrix[newPos.i][newPos.k] = (matrix[newPos.i][newPos.k] + 1)
+        }
+    }
+    return
+}
+```
+
+if it flashed before or if it has not enough power I just update the power + 1
+```swift
+/// for part 1 I need a 100 times loop - for part two I need a while loop , but decided 1000 was enough. I break earlier with the solution
+for time in 0..<1000 {
+    for i in 0..<rows {
+        for k in 0..<cols {
+            let position: (i: Int, k:Int) = (i: i, k: k)
+            /// I got a 9 before incrementing - this will flash hard! 😀 - of course (!) I check if the octopus already flashed before :))
+            if matrix[i][k] == 9 &&
+                !flashingArray.contains(where: { tuple in
+                tuple.i == position.i && tuple.k == position.k }) {
+                /// keep track of the octopus, it will not need to flash again!
+                flashingArray.append(position)
+                flashInAllDirections(position: position, flashingArray: &flashingArray, matrix: &matrix)
+            } else {
+                /// if I am here - because the octopus did not have a 9!
+                /// lets increase my energy
+                /// if after that I reached a 9 it is ok - not ready to flash!
+                matrix[i][k] = (matrix[i][k] + 1)
+            }
+        }
+    }
+    for pos in flashingArray {
+        matrix[pos.i][pos.k] = 0
+    }
+    totalFlashes += flashingArray.count
+    if flashingArray.count == 100 {
+        print("synchronicity@@@@@@")
+        print("Solution day11 - Part2: \(time + 1)")
+        break
+    }
+    flashingArray = []
+    if time + 1 == 100 {
+        print("Solution day11 - Part1: \(totalFlashes)")
+    }
+}
+```
