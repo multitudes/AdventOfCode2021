@@ -50,7 +50,7 @@ func day11() {
                     tuple.i == position.i && tuple.k == position.k }) {
                     /// keep track of the octopus, it will not need to flash again!
                     flashingArray.append(position)
-                    checkAllDirections(position: position, flashingArray: &flashingArray, matrix: &matrix)
+                    flashInAllDirections(position: position, flashingArray: &flashingArray, matrix: &matrix)
                 } else {
                     /// if I am here - because the octopus did not have a 9!
                     /// lets increase my energy
@@ -75,9 +75,10 @@ func day11() {
     }
 }
 
-func checkAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
+func flashInAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i: Int, k: Int)>, matrix: inout [[Int]] ) {
     let rows: Int = matrix.count
     let cols: Int = matrix.first?.count ?? 0
+    /// add 1 power to my fellow 🐙s
     for dir in directions {
         /// go in the direction adding or substracting 1 and get new pos
         let newPos = (i: (position.i + dir.i), k: (position.k + dir.k))
@@ -91,7 +92,7 @@ func checkAllDirections(position: (i: Int, k:Int), flashingArray: inout Array<(i
             }) {
                 /// first timer, needs to flash
                 flashingArray.append(newPos)
-                checkAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
+                flashInAllDirections(position: newPos, flashingArray: &flashingArray, matrix: &matrix)
             } else {
                 /// this will be not flashing
                 continue
